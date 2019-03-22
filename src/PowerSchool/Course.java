@@ -1,3 +1,5 @@
+package PowerSchool;
+
 public class Course {
 
     String courseTitle;

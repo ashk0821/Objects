@@ -1,3 +1,5 @@
+package PowerSchool;
+
 public class Grade {
     int grade;
     boolean audited;

@@ -1,3 +1,5 @@
+package PowerSchool;
+
 public class Student implements Comparable<Student>{
     String name;
     int gradYear;

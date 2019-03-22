@@ -2,27 +2,42 @@ package PowerSchool;
 
 public class School {
 
-    final String Name = "";
-    Student[] enrolledStudents;
-    Course[] schoolCourses;
+    final String name;
+    Student[] enrolledStudents = new Student[300];
+    Course[] schoolCourses = new Course[300];
 
     // Maximum of 300 Students per school
     // Maximum of 300 Courses per school
-    public School(String name){}
+    public School(String name){
+        this.name = name;
+    }
 
     // Returns name of school
     public String getName(){
-        return "x";
+        return name;
     }
 
     // Returns number of enrolled students
     public int enrolledStudents(){
-        return 0;
+        int length = 0;
+        for(int i = 0; i < enrolledStudents.length; i++){
+            if(enrolledStudents[i] == null){
+                return length;
+            }
+            length++;
+        }
+        return length;
     }
 
     /* Returns the array of courses. (Deep copy)
      */
     public Course[] getCourses(){
+        Course[] ret = new Course[schoolCourses.length];
+        for(int i = 0; i < ret.length; i++){
+            ret[i] = schoolCourses[i];
+        }
+
+        return ret;
     }
 
     /* returns Student with specified class rank. Since you have implemented compareTo,
@@ -37,6 +52,17 @@ public class School {
     * Student is already enrolled at that school.
     */
     public boolean addStudent(Student someKid){
+        if(enrolledStudents.length >= 300){
+            return false;
+        }
+
+        for(int i = 0; i < enrolledStudents(); i++){
+            if(enrolledStudents[i].equals(someKid)){
+                return false;
+            }
+        }
+
+
 
     }
 
@@ -68,6 +94,5 @@ public class School {
 
     }
 
-    */
 
 }
