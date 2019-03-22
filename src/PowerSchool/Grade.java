@@ -1,4 +1,4 @@
-package Labs.PowerSchoolLab;
+package PowerSchool;
 
 public class Grade {
     int grade;
