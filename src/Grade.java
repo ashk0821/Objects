@@ -1,5 +1,3 @@
-package Labs.PowerSchoolLab;
-
 public class Grade {
     int grade;
     boolean audited;

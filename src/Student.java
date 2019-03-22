@@ -1,5 +1,3 @@
-package Labs.PowerSchoolLab;
-
 public class Student implements Comparable<Student>{
     String name;
     int gradYear;
