@@ -1,4 +1,3 @@
-package Labs.PowerSchoolLab;
 
 public class Course {
 
