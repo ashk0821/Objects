@@ -1,3 +1,4 @@
+package PowerSchool;
 
 public class Course {
 
