@@ -62,14 +62,16 @@ public class School {
             }
         }
 
-
-
+        enrolledStudents[enrolledStudents()] = someKid;
+        return true;
     }
 
     /* Removes a student to the school.
      */
     public void unenrollStudent(Student someKid){
-
+        for(int i = 0; i < enrolledStudents(); i++){
+            if()
+        }
     }
 
     /* Creates a class. Returns false if a class with exactly the same specifications

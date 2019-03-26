@@ -18,10 +18,14 @@ public class Grade {
         this.honors = honors;
         this.audited = audited;
         this.course = course;
+
+        if(honors){
+            grade += grade * 0.05;
+        }
     }
 
     public int gradeValue(){
-        return 0;
+        return grade;
     }
 
     public boolean honors(){
