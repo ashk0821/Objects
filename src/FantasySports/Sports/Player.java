@@ -8,6 +8,7 @@ public class Player implements SportsProfessional{
     String name;
 
     public void changeRating (int playerRating) {
+
     }
 
     public int changeMorale (boolean gameResult) {
