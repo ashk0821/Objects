@@ -57,6 +57,18 @@ public class Course {
     }
 
     public void setGrade(Student someStudent, int grade){
+        for(int i = 0; i < enrolledStudents.length; i++){
+            if(someStudent.equals(enrolledStudents[i])){
+                grades[i].grade = grade;
+            }
+        }
+    }
 
+    public boolean enroll(Student someStudent, boolean audited){
+        if(enrolledStudents.length >= 20){
+            return false;
+        }
+
+        if()
     }
 }
