@@ -4,8 +4,11 @@ public class Coach implements SportsProfessional{
     int coachRating;
     Player player;
 
-    public int changeRating (int playerRating) {
-        return 0;
+    public void changeRating (int playerRating) {
+        player.speed ++;
+        player.catching ++;
+        player.power ++;
+        player.stamina ++;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -13,7 +16,7 @@ public class Coach implements SportsProfessional{
     }
 
     public int getRating() {
-        return 0;
+        return coachRating;
     }
 
     public int playGame() {

@@ -1,8 +1,7 @@
 package FantasySports.Sports;
 
 public class Team implements SportsProfessional{
-    public int changeRating (int playerRating) {
-        return 0;
+    public void changeRating (int playerRating) {
     }
 
     public int changeMorale (boolean gameResult) {

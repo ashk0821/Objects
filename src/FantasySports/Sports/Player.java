@@ -7,8 +7,7 @@ public class Player implements SportsProfessional{
     int power;
     String name;
 
-    public int changeRating (int playerRating) {
-        return 0;
+    public void changeRating (int playerRating) {
     }
 
     public int changeMorale (boolean gameResult) {
@@ -16,10 +15,14 @@ public class Player implements SportsProfessional{
     }
 
     public int getRating() {
-        return 0;
+        return (speed + catching + stamina + power) / 4;
     }
 
     public int playGame() {
         return 0;
+    }
+
+    public String getName () {
+        return name;
     }
 }
