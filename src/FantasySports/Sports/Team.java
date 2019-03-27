@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Team implements SportsProfessional{
     public void changeRating (int playerRating) {
+
     }
 
     public int changeMorale (boolean gameResult) {
