@@ -7,5 +7,4 @@ public interface SportsProfessional {
 
     public int getRating();
 
-    public int playGame();
 }

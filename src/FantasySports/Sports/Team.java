@@ -2,8 +2,10 @@ package FantasySports.Sports;
 import java.util.Random;
 
 public class Team implements SportsProfessional{
-    public void changeRating (int playerRating) {
-
+    public void changeRating (int teamRating) {
+        boolean did_i_win = false;
+        Team result = new Team();
+        result.gamePlayed(did_i_win);
     }
 
     public int changeMorale (boolean gameResult) {

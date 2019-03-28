@@ -18,8 +18,4 @@ public class Coach implements SportsProfessional{
     public int getRating() {
         return coachRating;
     }
-
-    public int playGame() {
-        return 0;
-    }
 }

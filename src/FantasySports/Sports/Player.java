@@ -19,10 +19,6 @@ public class Player implements SportsProfessional{
         return (speed + catching + stamina + power) / 4;
     }
 
-    public int playGame() {
-        return 0;
-    }
-
     public String getName () {
         return name;
     }
