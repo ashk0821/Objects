@@ -2,11 +2,14 @@ package FantasySports.Sports;
 import java.util.Random;
 
 public class Team implements SportsProfessional{
-    int team_morale = 0;
-    int teamRating = 70;
+    int team_morale;
+    int teamRating;
 
-    public void changeRating (int teamRating) {
-        this.teamRating += teamRating;
+    public void changeRating (int teamRating, boolean gameResult) {
+        if (gameResult)
+            this.teamRating += teamRating;
+        else
+            this.teamRating -= teamRating;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -55,9 +58,6 @@ public class Team implements SportsProfessional{
         else
             did_i_win = true;
 
-        if (did_i_win)
-            changeRating(teamRating);
-        else
-            teamRating -= 1;
+        changeRating(teamRating, did_i_win);
     }
 }
