@@ -3,8 +3,9 @@ package FantasySports.Sports;
 public class Coach implements SportsProfessional{
     int coachRating;
     Player player;
+    int morale;
 
-    public void changeRating (int playerRating) {
+    public void changeRating (int playerRating, boolean gameResult) {
         player.speed ++;
         player.catching ++;
         player.power ++;
@@ -12,7 +13,12 @@ public class Coach implements SportsProfessional{
     }
 
     public int changeMorale (boolean gameResult) {
-        return 0;
+        if (gameResult)
+            morale += 2;
+        else
+            morale --;
+
+        return morale;
     }
 
     public int getRating() {

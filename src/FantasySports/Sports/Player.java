@@ -7,14 +7,33 @@ public class Player implements SportsProfessional{
     int catching;
     int stamina;
     int power;
+    int morale;
     String name;
-    Team team;
-    Team opponent;
 
-    public void changeRating (int playerRating) {
-        Random stat = new Random();
-        int change_stat = stat.nextInt(3);
+    public void changeRating (int playerRating, boolean gameResult) {
+        Random stat_to_change = new Random();
+        int stat = stat_to_change.nextInt(3);
+        if (gameResult) {
+            if (stat == 0)
+                speed += 3;
+            else if (stat == 1)
+                catching += 3;
+            else if (stat == 2)
+                stamina += 3;
+            else
+                power += 3;
+        }
 
+        else {
+        if (stat == 0)
+            speed -= 2;
+        else if (stat == 1)
+            catching -= 2;
+        else if (stat == 2)
+            stamina -= 2;
+        else
+            power -= 2;
+        }
     }
 
     public int getRating () {
@@ -22,7 +41,12 @@ public class Player implements SportsProfessional{
     }
 
     public int changeMorale (boolean gameResult) {
-        return 0;
+        if (gameResult)
+            morale += 2;
+        else
+            morale --;
+
+        return morale;
     }
 
     public String getName () {
