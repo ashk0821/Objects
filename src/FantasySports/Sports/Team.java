@@ -28,7 +28,7 @@ public class Team implements SportsProfessional{
         return teamRating;
     }
 
-    Team playGame (Team opponent) {
+    public Team playGame (Team opponent) {
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
         Team team = new Team();
