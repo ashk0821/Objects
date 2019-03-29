@@ -3,16 +3,10 @@ import java.util.Random;
 
 public class Team implements SportsProfessional{
     int team_morale = 0;
-    int teamRating = 50;
+    int teamRating = 70;
+
     public void changeRating (int teamRating) {
-        boolean did_i_win = false;
-        Team result = new Team();
-        result.gamePlayed(did_i_win);
-        if (did_i_win)
-            teamRating ++;
-        else
-            teamRating --;
-        this.teamRating = teamRating;
+        this.teamRating += teamRating;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -60,5 +54,10 @@ public class Team implements SportsProfessional{
             did_i_win =  false;
         else
             did_i_win = true;
+
+        if (did_i_win)
+            changeRating(teamRating);
+        else
+            teamRating -= 1;
     }
 }
