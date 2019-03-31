@@ -3,12 +3,13 @@ package FantasySports.Sports;
 import java.util.Random;
 
 public class Player implements SportsProfessional{
-    int speed;
-    int catching;
-    int stamina;
-    int power;
-    int morale;
-    String name;
+    public int speed;
+    public int catching;
+    public int stamina;
+    public int power;
+    public int morale;
+    public String name;
+    public Team team;
 
     public void changeRating (int playerRating, boolean gameResult) {
         Random stat_to_change = new Random();
@@ -51,5 +52,13 @@ public class Player implements SportsProfessional{
 
     public String getName () {
         return name;
+    }
+
+    public Team getTeam () {
+        return team;
+    }
+
+    public String toString() {
+        return "Hi, my name is " + getName() + " and I play for " + getTeam() + ". My overall rating is " + getRating();
     }
 }
