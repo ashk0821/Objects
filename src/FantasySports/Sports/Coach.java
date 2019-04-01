@@ -1,15 +1,21 @@
 package FantasySports.Sports;
 
 public class Coach implements SportsProfessional{
-    int coachRating;
-    Player player;
-    int morale;
+    public int coachRating;
+    public int morale;
 
-    public void changeRating (int playerRating, boolean gameResult) {
+    public void Train (Player player) {
         player.speed ++;
         player.catching ++;
         player.power ++;
-        player.stamina ++;
+        player.stamina++;
+    }
+
+    public void changeRating (boolean gameResult) {
+        if (gameResult)
+            coachRating ++;
+        else
+            coachRating --;
     }
 
     public int changeMorale (boolean gameResult) {

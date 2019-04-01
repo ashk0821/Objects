@@ -10,13 +10,14 @@ public class Team implements SportsProfessional{
     int number_of_players;
     public int teamFinalRating;
     public java.lang.String team_name;
+    public Coach coach;
     ArrayList<java.lang.String> players = new ArrayList<>();
 
-    public void changeRating (int teamRating, boolean gameResult) {
+    public void changeRating (boolean gameResult) {
         if (gameResult)
-            this.teamFinalRating += teamRating;
+            teamRating ++;
         else
-            this.teamFinalRating -= teamRating;
+            teamRating --;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -67,7 +68,7 @@ public class Team implements SportsProfessional{
         else
             did_i_win = true;
 
-        changeRating(teamFinalRating, did_i_win);
+        changeRating(did_i_win);
     }
 
     public void draft (Player player) {

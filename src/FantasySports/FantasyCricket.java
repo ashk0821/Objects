@@ -37,7 +37,7 @@ public class FantasyCricket {
         ben.stamina = 99;
         ben.catching = 99;
         ben.power = 99;
-        ben.name = "Mr. Iseke";
+        ben.name = "Mr. Isecke";
         chelsea.draft(ben);
         ben.team = chelsea;
 
@@ -122,5 +122,46 @@ public class FantasyCricket {
         System.out.println(real_madrid.team_name +  "'s players are: " + real_madrid.getPlayers());
 
         System.out.println(real_madrid.team_name + "'s overall rating is " + real_madrid.getRating() + ".");
+
+        System.out.println("\n\n");
+
+        Player chris = new Player();
+        chris.speed = 55;
+        chris.stamina = 35;
+        chris.catching = 85;
+        chris.power = 80;
+        chris.name = "Chris";
+        barca.draft(chris);
+        chris.team = barca;
+
+        Player leo = new Player();
+        leo.speed = 85;
+        leo.stamina = 85;
+        leo.catching = 35;
+        leo.power = 45;
+        leo.name = "Lionel Messi";
+        barca.draft(leo);
+        leo.team = barca;
+
+        Player ansh = new Player();
+        ansh.speed = 60;
+        ansh.stamina = 60;
+        ansh.catching = 60;
+        ansh.power = 60;
+        ansh.name = "Ansh";
+        barca.draft(ansh);
+        ansh.team = barca;
+
+        System.out.println(chris.toString());
+        System.out.println(leo.toString());
+        System.out.println(ansh.toString());
+
+        System.out.println(barca.team_name +  "'s players are: " + barca.getPlayers());
+
+        System.out.println(barca.team_name + "'s overall rating is " + barca.getRating() + ".");
+
+        chelsea.coach.coachRating = 75;
+        System.out.println(chelsea.coach.getRating());
+        chelsea.coach.Train(eden);
     }
 }

@@ -13,7 +13,7 @@ public class Player implements SportsProfessional{
     public java.lang.String name;
     public Team team;
 
-    public void changeRating (int playerRating, boolean gameResult) {
+    public void changeRating (boolean gameResult) {
         Random stat_to_change = new Random();
         int stat = stat_to_change.nextInt(3);
         if (gameResult) {
