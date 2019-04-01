@@ -6,14 +6,17 @@ import java.util.Random;
 
 public class Team implements SportsProfessional{
     public int team_morale;
-    public int teamRating;
-    ArrayList<Player> players = new ArrayList<>();
+    int teamRating;
+    int number_of_players;
+    public int teamFinalRating;
+    public java.lang.String team_name;
+    ArrayList<java.lang.String> players = new ArrayList<>();
 
     public void changeRating (int teamRating, boolean gameResult) {
         if (gameResult)
-            this.teamRating += teamRating;
+            this.teamFinalRating += teamRating;
         else
-            this.teamRating -= teamRating;
+            this.teamFinalRating -= teamRating;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -29,7 +32,8 @@ public class Team implements SportsProfessional{
     }
 
     public int getRating() {
-        return teamRating;
+        teamFinalRating = teamRating / number_of_players;
+        return teamFinalRating;
     }
 
     public Team playGame (Team opponent) {
@@ -63,18 +67,20 @@ public class Team implements SportsProfessional{
         else
             did_i_win = true;
 
-        changeRating(teamRating, did_i_win);
+        changeRating(teamFinalRating, did_i_win);
     }
 
     public void draft (Player player) {
-        players.add(player);
+        players.add(player.name);
+        teamRating += player.getRating();
+        number_of_players ++;
     }
 
     public java.lang.String getPlayers() {
         java.lang.String roster = "";
 
         for (int i=0; i<players.size(); i++)
-            roster += players.get(i);
+            roster += players.get(i) + ", ";
 
         return roster;
     }
