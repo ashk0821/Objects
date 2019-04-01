@@ -1,9 +1,13 @@
 package FantasySports.Sports;
+import com.sun.org.apache.xpath.internal.operations.String;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Team implements SportsProfessional{
-    int team_morale;
-    int teamRating;
+    public int team_morale;
+    public int teamRating;
+    ArrayList<Player> players = new ArrayList<>();
 
     public void changeRating (int teamRating, boolean gameResult) {
         if (gameResult)
@@ -37,6 +41,7 @@ public class Team implements SportsProfessional{
         int yourRating = opponent.getRating();
 
         int ratingDifference = Math.abs(myRating-yourRating);
+        System.out.println(ratingDifference);
         int results = rand.nextInt(ratingDifference);
 
         if (results >= 3) {
@@ -59,5 +64,18 @@ public class Team implements SportsProfessional{
             did_i_win = true;
 
         changeRating(teamRating, did_i_win);
+    }
+
+    public void draft (Player player) {
+        players.add(player);
+    }
+
+    public java.lang.String getPlayers() {
+        java.lang.String roster = "";
+
+        for (int i=0; i<players.size(); i++)
+            roster += players.get(i);
+
+        return roster;
     }
 }
