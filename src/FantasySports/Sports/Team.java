@@ -11,13 +11,14 @@ public class Team implements SportsProfessional{
     public int teamFinalRating;
     public java.lang.String team_name;
     public Coach coach;
+    int teamBonusPoints = 0; // since team rating is just an average, this is just an account of W/L
     ArrayList<java.lang.String> players = new ArrayList<>();
 
     public void changeRating (boolean gameResult) {
         if (gameResult)
-            teamRating ++;
+            teamBonusPoints ++;
         else
-            teamRating --;
+            teamBonusPoints --;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -33,8 +34,12 @@ public class Team implements SportsProfessional{
     }
 
     public int getRating() {
-        teamFinalRating = (teamRating + coach.coachRating) / (number_of_players + 1);
+        teamFinalRating = teamRating / number_of_players;
         return teamFinalRating;
+    }
+
+    public int getFinalRating() {
+        return teamFinalRating + teamBonusPoints;
     }
 
     public Team playGame (Team opponent) {
