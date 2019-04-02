@@ -1,5 +1,7 @@
 package FantasySports.Sports;
 
+import com.sun.org.apache.xpath.internal.operations.String;
+
 import java.util.Random;
 
 public class Player implements SportsProfessional{
@@ -8,10 +10,10 @@ public class Player implements SportsProfessional{
     public int stamina;
     public int power;
     public int morale;
-    public String name;
+    public java.lang.String name;
     public Team team;
 
-    public void changeRating (int playerRating, boolean gameResult) {
+    public void changeRating (boolean gameResult) {
         Random stat_to_change = new Random();
         int stat = stat_to_change.nextInt(3);
         if (gameResult) {
@@ -50,15 +52,15 @@ public class Player implements SportsProfessional{
         return morale;
     }
 
-    public String getName () {
+    public java.lang.String getName () {
         return name;
     }
 
-    public Team getTeam () {
-        return team;
+    public java.lang.String getTeam () {
+        return team.team_name;
     }
 
-    public String toString() {
-        return "Hi, my name is " + getName() + " and I play for " + getTeam() + ". My overall rating is " + getRating();
+    public java.lang.String toString() {
+        return "Hi, my name is " + getName() + " and I play for " + getTeam() + ". My overall rating is " + getRating() + "!";
     }
 }

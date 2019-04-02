@@ -1,5 +1,7 @@
 package PowerSchool;
 
+import java.util.Arrays;
+
 public class School {
 
     final String name;
@@ -44,7 +46,14 @@ public class School {
      * you can use Arrays.sort to sort enrolledStudets.
      */
     public Student kidWithClassRank(int rank){
+        Arrays.sort(enrolledStudents);
 
+        for(int i = 0; i < enrolledStudents.length; i++){
+            if(i+1 == rank){
+                return enrolledStudents[i];
+            }
+        }
+        return null;
     }
 
     /* Adds a student to the school.
@@ -70,7 +79,10 @@ public class School {
      */
     public void unenrollStudent(Student someKid){
         for(int i = 0; i < enrolledStudents(); i++){
-            if()
+            if(enrolledStudents[i].equals(someKid)){
+                enrolledStudents[i] = null;
+                Arrays.sort(enrolledStudents);
+            }
         }
     }
 
@@ -78,7 +90,21 @@ public class School {
      * have already been made.
      */
     public boolean createClass(String Teacher, String title, boolean honors){
-
+        Course c1 = new Course(Teacher, title, honors);
+        for(int i = 0; i < schoolCourses.length; i++){
+            if(schoolCourses[i].equals(c1)){
+                return false;
+            }
+            if(schoolCourses[i] == null)
+                break;
+        }
+        for(int i = 0; i < schoolCourses.length; i++){
+            if(schoolCourses[i] == null){
+                schoolCourses[i] = c1;
+                return true;
+            }
+        }
+        return false;
     }
 
     /* Enrolls Student in Course and returns true if successful.
@@ -86,14 +112,46 @@ public class School {
      * Student would have more than 10 Courses.
      */
     public boolean enroll (Student kid, Course someCourse, boolean audited){
-
+        if(kid.schedule.length >= 10){
+            return false;
+        }
+        for(int i = 0; i < schoolCourses.length; i++){
+            if(schoolCourses[i].equals(someCourse)){
+                if(schoolCourses[i].numberEnrolled() < 20){
+                    schoolCourses[i].enroll(kid, audited);
+                }
+            }
+            if(schoolCourses[i] == null)
+                break;
+        }
+        return false;
     }
 
     /* Unenrolls Student in Course and returns true if successful.
      * Returns false if: Course not in school, or Student not in Course.
      */
     public boolean unenroll (Student kid, Course someCourse){
+        for(int i = 0; i < schoolCourses.length; i++){
+            if(schoolCourses[i].equals(someCourse)){
+                for(int j = 0; i < schoolCourses[i].enrolledStudents.length; j++){
+                    if(schoolCourses[i].enrolledStudents[j].equals(kid)){
+                        schoolCourses[i].enrolledStudents[j] = null;
+                        Arrays.sort(schoolCourses[i].enrolledStudents);
+                        return true;
+                    }
 
+                    if(schoolCourses[i].enrolledStudents[j] == null){
+                        return false;
+                    }
+                }
+
+                return false;
+            }
+
+            if(schoolCourses[i] == null)
+                return false;
+        }
+        return false;
     }
 
 

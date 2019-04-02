@@ -6,14 +6,19 @@ import java.util.Random;
 
 public class Team implements SportsProfessional{
     public int team_morale;
-    public int teamRating;
+    int teamRating;
+    int number_of_players;
+    public int teamFinalRating;
+    public java.lang.String team_name;
+    public Coach coach;
+    int teamBonusPoints = 0; // since team rating is just an average, this is just an account of W/L
     ArrayList<Player> players = new ArrayList<>();
 
-    public void changeRating (int teamRating, boolean gameResult) {
+    public void changeRating (boolean gameResult) {
         if (gameResult)
-            this.teamRating += teamRating;
+            teamBonusPoints ++;
         else
-            this.teamRating -= teamRating;
+            teamBonusPoints --;
     }
 
     public int changeMorale (boolean gameResult) {
@@ -29,16 +34,26 @@ public class Team implements SportsProfessional{
     }
 
     public int getRating() {
-        return teamRating;
+        teamFinalRating = teamRating / number_of_players;
+        return teamFinalRating;
+    }
+
+    public int getFinalRating() {
+        teamRating = 0;
+
+        for (int i=0; i<players.size(); i++) {
+            teamRating += players.get(i).getRating();
+        }
+        return teamRating / number_of_players + teamBonusPoints;
     }
 
     public Team playGame (Team opponent) {
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
         Team team = new Team();
-        int myRating = team.getRating();
+        int myRating = team.getFinalRating();
         opponent = new Team();
-        int yourRating = opponent.getRating();
+        int yourRating = opponent.getFinalRating();
 
         int ratingDifference = Math.abs(myRating-yourRating);
         System.out.println(ratingDifference);
@@ -63,18 +78,20 @@ public class Team implements SportsProfessional{
         else
             did_i_win = true;
 
-        changeRating(teamRating, did_i_win);
+        changeRating(did_i_win);
     }
 
     public void draft (Player player) {
         players.add(player);
+        teamRating += player.getRating();
+        number_of_players ++;
     }
 
     public java.lang.String getPlayers() {
         java.lang.String roster = "";
 
         for (int i=0; i<players.size(); i++)
-            roster += players.get(i);
+            roster += players.get(i).name + ", ";
 
         return roster;
     }

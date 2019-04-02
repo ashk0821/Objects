@@ -8,7 +8,7 @@ public class SmartGambler implements Gambler {
     public Team chosen;
     public Team winner;
     public Team loser;
-    int currentBalance;
+    int currentBalance=1000;
 
     public void bet (Team a, Team b) {
         if (a.getRating() >= b.getRating())
