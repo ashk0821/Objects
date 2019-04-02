@@ -33,7 +33,7 @@ public class Team implements SportsProfessional{
     }
 
     public int getRating() {
-        teamFinalRating = teamRating / number_of_players;
+        teamFinalRating = (teamRating + coach.coachRating) / (number_of_players + 1);
         return teamFinalRating;
     }
 

@@ -42,9 +42,16 @@ public class FantasyCricket {
         chelsea.draft(ben);
         ben.team = chelsea;
 
+        Coach sarri = new Coach();
+        sarri.coachRating = 75;
+        sarri.team = chelsea;
+        sarri.name = "Mauricio Sarri";
+        System.out.println("Sarri's rating is " + sarri.getRating());
+
         System.out.println(alan.toString());
         System.out.println(eden.toString());
         System.out.println(ben.toString());
+        System.out.println(sarri.toString());
 
         System.out.println(chelsea.team_name +  "'s players are: " + chelsea.getPlayers());
 
@@ -163,10 +170,7 @@ public class FantasyCricket {
 
         System.out.println("\n");
 
-        Coach sarri = new Coach();
-        sarri.coachRating = 75;
-        sarri.team = chelsea;
-        System.out.println("Sarri's rating is " + sarri.getRating());
+
 
         System.out.println(eden.toString());
         sarri.Train(eden);
@@ -179,5 +183,11 @@ public class FantasyCricket {
         System.out.println(ben.toString());
         sarri.Train(ben);
         System.out.println(ben.toString());
+
+        Coach jurgen = new Coach();
+        jurgen.coachRating = 85;
+        jurgen.team = liverpool;
+
+
     }
 }

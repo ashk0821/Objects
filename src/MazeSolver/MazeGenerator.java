@@ -13,7 +13,7 @@ public class MazeGenerator {
             maze = new int[rows][columns];
         }
 
-        int
+        //int
 
     }
 

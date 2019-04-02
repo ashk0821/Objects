@@ -4,6 +4,7 @@ public class Coach implements SportsProfessional{
     public int coachRating;
     public int morale;
     public Team team;
+    public String name;
 
     public void Train (Player player) {
         if (player.team == team) {
@@ -47,5 +48,17 @@ public class Coach implements SportsProfessional{
 
     public int getRating() {
         return coachRating;
+    }
+
+    public java.lang.String getName () {
+        return name;
+    }
+
+    public java.lang.String getTeam () {
+        return team.team_name;
+    }
+
+    public String toString() {
+        return "Hi, my name is " + getName() + " and I coach " + getTeam() + ". My overall rating is " + coachRating + "!";
     }
 }

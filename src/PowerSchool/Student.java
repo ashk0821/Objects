@@ -27,7 +27,7 @@ public class Student implements Comparable<Student>{
     public double getGPA(){
         Grade g;
         for(int i = 0; i < schedule.length; i++){
-            g = schedule[i].gradeOf()
+            //g = schedule[i].gradeOf();
         }
 
         return 0;
