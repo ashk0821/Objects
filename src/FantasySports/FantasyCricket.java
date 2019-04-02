@@ -209,5 +209,17 @@ public class FantasyCricket {
         ernesto.Train(alan);
         ernesto.Train(ansh);
         System.out.println(ansh.toString());
+        System.out.println();
+        System.out.println(mo.toString());
+        jurgen.Train(mo);
+        System.out.println(mo.toString());
+
+        System.out.println("\n");
+        System.out.println(chelsea.team_name + "'s overall rating is " + chelsea.getFinalRating() + ".");
+        System.out.println(liverpool.team_name + "'s overall rating is " + liverpool.getFinalRating() + ".");
+        System.out.println(real_madrid.team_name + "'s overall rating is " + real_madrid.getFinalRating() + ".");
+        System.out.println(barca.team_name + "'s overall rating is " + barca.getFinalRating() + ".");
+
+
     }
 }
