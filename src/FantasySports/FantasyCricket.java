@@ -1,5 +1,9 @@
 package FantasySports;
 
+import FantasySports.Gambling.AmbitiousGambler;
+import FantasySports.Gambling.DumbGambler;
+import FantasySports.Gambling.Gambler;
+import FantasySports.Gambling.SmartGambler;
 import FantasySports.Sports.Coach;
 import FantasySports.Sports.Player;
 import FantasySports.Sports.Team;
@@ -220,6 +224,13 @@ public class FantasyCricket {
         System.out.println(real_madrid.team_name + "'s overall rating is " + real_madrid.getFinalRating() + ".");
         System.out.println(barca.team_name + "'s overall rating is " + barca.getFinalRating() + ".");
 
+        SmartGambler smart_gambler = new SmartGambler();
+        DumbGambler dumb_gambler = new DumbGambler();
+        AmbitiousGambler ambitious_gambler = new AmbitiousGambler();
+
+        smart_gambler.bet(chelsea, liverpool);
+        dumb_gambler.bet(chelsea, liverpool);
+        ambitious_gambler.bet(chelsea, liverpool);
 
     }
 }
