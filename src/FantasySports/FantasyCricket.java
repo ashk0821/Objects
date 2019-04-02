@@ -50,7 +50,7 @@ public class FantasyCricket {
 
         System.out.println(chelsea.team_name + "'s overall rating is " + chelsea.getRating() + ".");
 
-        System.out.println("\n\n");
+        System.out.println("\n");
 
         Player aashir = new Player();
         aashir.speed = 75;
@@ -87,7 +87,7 @@ public class FantasyCricket {
 
         System.out.println(liverpool.team_name + "'s overall rating is " + liverpool.getRating() + ".");
 
-        System.out.println("\n\n");
+        System.out.println("\n");
 
         Player amani = new Player();
         amani.speed = 95;
@@ -124,7 +124,7 @@ public class FantasyCricket {
 
         System.out.println(real_madrid.team_name + "'s overall rating is " + real_madrid.getRating() + ".");
 
-        System.out.println("\n\n");
+        System.out.println("\n");
 
         Player chris = new Player();
         chris.speed = 55;
@@ -161,7 +161,7 @@ public class FantasyCricket {
 
         System.out.println(barca.team_name + "'s overall rating is " + barca.getRating() + ".");
 
-        System.out.println("\n\n");
+        System.out.println("\n");
 
         Coach sarri = new Coach();
         sarri.coachRating = 75;
@@ -175,5 +175,9 @@ public class FantasyCricket {
         System.out.println(matt.toString());
         sarri.Train(matt);
         System.out.println(matt.toString());
+        System.out.println();
+        System.out.println(ben.toString());
+        sarri.Train(ben);
+        System.out.println(ben.toString());
     }
 }
