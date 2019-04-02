@@ -46,9 +46,9 @@ public class Team implements SportsProfessional{
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
         Team team = new Team();
-        int myRating = team.getRating();
+        int myRating = team.getFinalRating();
         opponent = new Team();
-        int yourRating = opponent.getRating();
+        int yourRating = opponent.getFinalRating();
 
         int ratingDifference = Math.abs(myRating-yourRating);
         System.out.println(ratingDifference);
