@@ -1,5 +1,6 @@
 package FantasySports;
 
+import FantasySports.Sports.Coach;
 import FantasySports.Sports.Player;
 import FantasySports.Sports.Team;
 
@@ -160,8 +161,19 @@ public class FantasyCricket {
 
         System.out.println(barca.team_name + "'s overall rating is " + barca.getRating() + ".");
 
-        chelsea.coach.coachRating = 75;
-        System.out.println(chelsea.coach.getRating());
-        chelsea.coach.Train(eden);
+        System.out.println("\n\n");
+
+        Coach sarri = new Coach();
+        sarri.coachRating = 75;
+        sarri.team = chelsea;
+        System.out.println("Sarri's rating is " + sarri.getRating());
+
+        System.out.println(eden.toString());
+        sarri.Train(eden);
+        System.out.println(eden.toString());
+        System.out.println();
+        System.out.println(matt.toString());
+        sarri.Train(matt);
+        System.out.println(matt.toString());
     }
 }

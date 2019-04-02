@@ -3,12 +3,18 @@ package FantasySports.Sports;
 public class Coach implements SportsProfessional{
     public int coachRating;
     public int morale;
+    public Team team;
 
     public void Train (Player player) {
-        player.speed ++;
-        player.catching ++;
-        player.power ++;
-        player.stamina++;
+        if (player.team == team) {
+            player.speed++;
+            player.catching++;
+            player.power++;
+            player.stamina++;
+        }
+        else {
+            System.out.println("The coach and player have to be on the same team!!");
+        }
     }
 
     public void changeRating (boolean gameResult) {
