@@ -34,7 +34,7 @@ public class Coach implements SportsProfessional{
             }
         }
         else {
-            System.out.println("The coach and player have to be on the same team!!");
+            System.out.println("The coach and player have to be on the same team!! " + player.name + " is not on " + team.team_name + "!!");
         }
 
         if (player.speed > 99 || player.catching > 99 || player.power > 99 || player.stamina > 99)

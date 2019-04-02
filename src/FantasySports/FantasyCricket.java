@@ -46,7 +46,6 @@ public class FantasyCricket {
         sarri.coachRating = 75;
         sarri.team = chelsea;
         sarri.name = "Mauricio Sarri";
-        System.out.println("Sarri's rating is " + sarri.getRating());
 
         System.out.println(alan.toString());
         System.out.println(eden.toString());
@@ -86,9 +85,15 @@ public class FantasyCricket {
         liverpool.draft(bryan);
         bryan.team = liverpool;
 
+        Coach jurgen = new Coach();
+        jurgen.coachRating = 85;
+        jurgen.team = liverpool;
+        jurgen.name = "Jurgen Klopp";
+
         System.out.println(aashir.toString());
         System.out.println(mo.toString());
         System.out.println(bryan.toString());
+        System.out.println(jurgen.toString());
 
         System.out.println(liverpool.team_name +  "'s players are: " + liverpool.getPlayers());
 
@@ -123,9 +128,15 @@ public class FantasyCricket {
         real_madrid.draft(matt);
         matt.team = real_madrid;
 
+        Coach zidane = new Coach();
+        zidane.coachRating = 99;
+        zidane.team = real_madrid;
+        zidane.name = "Zinedine Zidane";
+
         System.out.println(amani.toString());
         System.out.println(ramos.toString());
         System.out.println(matt.toString());
+        System.out.println(zidane.toString());
 
         System.out.println(real_madrid.team_name +  "'s players are: " + real_madrid.getPlayers());
 
@@ -160,9 +171,15 @@ public class FantasyCricket {
         barca.draft(ansh);
         ansh.team = barca;
 
+        Coach ernesto = new Coach();
+        ernesto.coachRating = 55;
+        ernesto.team = barca;
+        ernesto.name = "Ernesto Valverde";
+
         System.out.println(chris.toString());
         System.out.println(leo.toString());
         System.out.println(ansh.toString());
+        System.out.println(ernesto.toString());
 
         System.out.println(barca.team_name +  "'s players are: " + barca.getPlayers());
 
@@ -183,11 +200,14 @@ public class FantasyCricket {
         System.out.println(ben.toString());
         sarri.Train(ben);
         System.out.println(ben.toString());
-
-        Coach jurgen = new Coach();
-        jurgen.coachRating = 85;
-        jurgen.team = liverpool;
-
-
+        System.out.println();
+        System.out.println(amani.toString());
+        zidane.Train(amani);
+        System.out.println(amani.toString());
+        System.out.println();
+        System.out.println(ansh.toString());
+        ernesto.Train(alan);
+        ernesto.Train(ansh);
+        System.out.println(ansh.toString());
     }
 }
