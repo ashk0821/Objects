@@ -44,6 +44,8 @@ public class Team implements SportsProfessional{
         for (int i=0; i<players.size(); i++) {
             teamRating += players.get(i).getRating();
         }
+        if (number_of_players == 0)
+            throw new ArithmeticException("/ by 0");
         return teamRating / number_of_players + teamBonusPoints;
     }
 
