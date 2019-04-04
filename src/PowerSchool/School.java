@@ -7,31 +7,37 @@ import java.util.Collections;
 public class School {
 
     final String name;
-    //Student[] enrolledStudents = new Student[300];
-    ArrayList<Student> enrolledStudents = new ArrayList<>(300);
+    Student[] enrolledStudents = new Student[300];
     Course[] schoolCourses = new Course[300];
 
     // Maximum of 300 Students per school
     // Maximum of 300 Courses per school
-    public School(String name){
+    public School(String name) {
         this.name = name;
     }
 
     // Returns name of school
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     // Returns number of enrolled students
-    public int enrolledStudents(){
-        return enrolledStudents.size();
+    public int enrolledStudents() {
+        int length = 0;
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            if (enrolledStudents[i] == null)
+                break;
+            length++;
+        }
+
+        return length;
     }
 
     /* Returns the array of courses. (Deep copy)
      */
-    public Course[] getCourses(){
+    public Course[] getCourses() {
         Course[] ret = new Course[schoolCourses.length];
-        for(int i = 0; i < ret.length; i++){
+        for (int i = 0; i < ret.length; i++) {
             ret[i] = schoolCourses[i];
         }
 
@@ -41,12 +47,12 @@ public class School {
     /* returns Student with specified class rank. Since you have implemented compareTo,
      * you can use Arrays.sort to sort enrolledStudets.
      */
-    public Student kidWithClassRank(int rank){
-        Collections.sort(enrolledStudents);
+    public Student kidWithClassRank(int rank) {
+        Arrays.sort(enrolledStudents);
 
-        for(int i = 0; i < enrolledStudents.size(); i++){
-            if(i+1 == rank){
-                return enrolledStudents.get(i);
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            if (i + 1 == rank) {
+                return enrolledStudents[i];
             }
         }
         return null;
@@ -56,28 +62,34 @@ public class School {
     Returns false if the school is already full or if
     * Student is already enrolled at that school.
     */
-    public boolean addStudent(Student someKid){
-        if(enrolledStudents.size() >= 300){
+    public boolean addStudent(Student someKid) {
+        if (enrolledStudents.length >= 300) {
             return false;
         }
 
-        for(int i = 0; i < enrolledStudents(); i++){
-            if(enrolledStudents.get(i).equals(someKid)){
+        for (int i = 0; i < enrolledStudents(); i++) {
+            if (enrolledStudents[i].equals(someKid)) {
                 return false;
             }
         }
 
-        enrolledStudents.add(someKid);
+        int length = 0;
+
+        while (enrolledStudents[length] != null)
+            length += 1;
+
+        enrolledStudents[length] = someKid;
         return true;
     }
 
     /* Removes a student to the school.
      */
-    public void unenrollStudent(Student someKid){
-        for(int i = 0; i < enrolledStudents(); i++){
-            if(enrolledStudents.get(i).equals(someKid)){
-                enrolledStudents.set(i, null);
-                Collections.sort(enrolledStudents);
+    public void unenrollStudent(Student someKid) {
+        for (int i = 0; i < enrolledStudents(); i++) {
+            if (enrolledStudents[i].equals(someKid)) {
+                enrolledStudents[i] = null;
+                Arrays.sort(enrolledStudents);
+                break;
             }
         }
     }
@@ -85,21 +97,24 @@ public class School {
     /* Creates a class. Returns false if a class with exactly the same specifications
      * have already been made.
      */
-    public boolean createClass(String Teacher, String title, boolean honors){
+    public boolean createClass(String Teacher, String title, boolean honors) {
         Course c1 = new Course(Teacher, title, honors);
-        for(int i = 0; i < schoolCourses.length; i++){
-            if(schoolCourses[i].equals(c1)){
+        for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i] == null)
+                break;
+
+            if (schoolCourses[i].equals(c1)) {
                 return false;
             }
-            if(schoolCourses[i] == null)
-                break;
         }
-        for(int i = 0; i < schoolCourses.length; i++){
-            if(schoolCourses[i] == null){
-                schoolCourses[i] = c1;
-                return true;
-            }
-        }
+
+        int length = 0;
+
+        while (schoolCourses[length] != null)
+            length++;
+
+        schoolCourses[length] = c1;
+
         return false;
     }
 
@@ -107,17 +122,17 @@ public class School {
      * Returns false if: Course not in school, Course would have more than 20 students, or
      * Student would have more than 10 Courses.
      */
-    public boolean enroll (Student kid, Course someCourse, boolean audited){
-        if(kid.schedule.length >= 10){
+    public boolean enroll(Student kid, Course someCourse, boolean audited) {
+        if (kid.schedule.length >= 10) {
             return false;
         }
-        for(int i = 0; i < schoolCourses.length; i++){
-            if(schoolCourses[i].equals(someCourse)){
-                if(schoolCourses[i].numberEnrolled() < 20){
+        for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i].equals(someCourse)) {
+                if (schoolCourses[i].numberEnrolled() < 20) {
                     schoolCourses[i].enroll(kid, audited);
                 }
             }
-            if(schoolCourses[i] == null)
+            if (schoolCourses[i] == null)
                 break;
         }
         return false;
@@ -126,17 +141,17 @@ public class School {
     /* Unenrolls Student in Course and returns true if successful.
      * Returns false if: Course not in school, or Student not in Course.
      */
-    public boolean unenroll (Student kid, Course someCourse){
-        for(int i = 0; i < schoolCourses.length; i++){
-            if(schoolCourses[i].equals(someCourse)){
-                for(int j = 0; i < schoolCourses[i].enrolledStudents.length; j++){
-                    if(schoolCourses[i].enrolledStudents[j].equals(kid)){
+    public boolean unenroll(Student kid, Course someCourse) {
+        for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i].equals(someCourse)) {
+                for (int j = 0; i < schoolCourses[i].enrolledStudents.length; j++) {
+                    if (schoolCourses[i].enrolledStudents[j].equals(kid)) {
                         schoolCourses[i].enrolledStudents[j] = null;
                         Arrays.sort(schoolCourses[i].enrolledStudents);
                         return true;
                     }
 
-                    if(schoolCourses[i].enrolledStudents[j] == null){
+                    if (schoolCourses[i].enrolledStudents[j] == null) {
                         return false;
                     }
                 }
@@ -144,7 +159,7 @@ public class School {
                 return false;
             }
 
-            if(schoolCourses[i] == null)
+            if (schoolCourses[i] == null)
                 return false;
         }
         return false;

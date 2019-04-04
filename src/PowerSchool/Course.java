@@ -14,7 +14,7 @@ public class Course {
         this.honors = honors;
     }
 
-    public String courstTitle(){
+    public String courseTitle(){
         return courseTitle;
     }
 
