@@ -15,11 +15,17 @@ public class SchoolRunner {
         else
             System.out.println("Failed 1");
 
-        comp_sci.enrolledStudents[0] = alan;
-        comp_sci.enrolledStudents[1] = ansh;
-        comp_sci.enrolledStudents[2] = aashir;
-        comp_sci.enrolledStudents[3] = chris;
-        comp_sci.enrolledStudents[4] = amani;
+        comp_sci.addStudent(alan);
+
+        if (!comp_sci.addStudent(alan))
+            System.out.println("Passed 2a");
+        else
+            System.out.println("Failed 2a");
+
+        comp_sci.addStudent(ansh);
+        comp_sci.addStudent(aashir);
+        comp_sci.addStudent(chris);
+        comp_sci.addStudent(amani);
 
         if (comp_sci.enrolledStudents() == 5)
             System.out.println("Passed 2");
@@ -56,5 +62,7 @@ public class SchoolRunner {
             System.out.println("Passed 5");
         else
             System.out.println("Failed 5");
+
+
     }
 }

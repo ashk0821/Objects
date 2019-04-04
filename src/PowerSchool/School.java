@@ -1,11 +1,14 @@
 package PowerSchool;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class School {
 
     final String name;
-    Student[] enrolledStudents = new Student[300];
+    //Student[] enrolledStudents = new Student[300];
+    ArrayList<Student> enrolledStudents = new ArrayList<>(300);
     Course[] schoolCourses = new Course[300];
 
     // Maximum of 300 Students per school
@@ -21,14 +24,7 @@ public class School {
 
     // Returns number of enrolled students
     public int enrolledStudents(){
-        int length = 0;
-        for(int i = 0; i < enrolledStudents.length; i++){
-            if(enrolledStudents[i] == null){
-                return length;
-            }
-            length++;
-        }
-        return length;
+        return enrolledStudents.size();
     }
 
     /* Returns the array of courses. (Deep copy)
@@ -46,11 +42,11 @@ public class School {
      * you can use Arrays.sort to sort enrolledStudets.
      */
     public Student kidWithClassRank(int rank){
-        Arrays.sort(enrolledStudents);
+        Collections.sort(enrolledStudents);
 
-        for(int i = 0; i < enrolledStudents.length; i++){
+        for(int i = 0; i < enrolledStudents.size(); i++){
             if(i+1 == rank){
-                return enrolledStudents[i];
+                return enrolledStudents.get(i);
             }
         }
         return null;
@@ -61,17 +57,17 @@ public class School {
     * Student is already enrolled at that school.
     */
     public boolean addStudent(Student someKid){
-        if(enrolledStudents.length >= 300){
+        if(enrolledStudents.size() >= 300){
             return false;
         }
 
         for(int i = 0; i < enrolledStudents(); i++){
-            if(enrolledStudents[i].equals(someKid)){
+            if(enrolledStudents.get(i).equals(someKid)){
                 return false;
             }
         }
 
-        enrolledStudents[enrolledStudents()] = someKid;
+        enrolledStudents.add(someKid);
         return true;
     }
 
@@ -79,9 +75,9 @@ public class School {
      */
     public void unenrollStudent(Student someKid){
         for(int i = 0; i < enrolledStudents(); i++){
-            if(enrolledStudents[i].equals(someKid)){
-                enrolledStudents[i] = null;
-                Arrays.sort(enrolledStudents);
+            if(enrolledStudents.get(i).equals(someKid)){
+                enrolledStudents.set(i, null);
+                Collections.sort(enrolledStudents);
             }
         }
     }
@@ -153,6 +149,4 @@ public class School {
         }
         return false;
     }
-
-
 }
