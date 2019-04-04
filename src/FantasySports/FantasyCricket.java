@@ -234,5 +234,8 @@ public class FantasyCricket {
 
         System.out.println(chelsea.getFinalRating());
         chelsea.playGame(liverpool);
+
+
+
     }
 }
