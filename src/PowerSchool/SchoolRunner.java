@@ -31,7 +31,13 @@ public class SchoolRunner {
         comp_sci.addStudent(chris);
         comp_sci.addStudent(amani);
 
+        int i=0;
+        while (comp_sci.enrolledStudents[i] != null) {
+            System.out.println(comp_sci.enrolledStudents[i]);
+        }
+
         comp_sci.unenrollStudent(amani);
+
         if (comp_sci.addStudent(amani))
             System.out.println("Passed 2");
         else
@@ -61,19 +67,19 @@ public class SchoolRunner {
         else
             System.out.println("Failed 5");
 
-        if (comp_sci.enroll(alan, intro, true))
+        if (comp_sci.enroll(alan, intro, false))
             System.out.println("Passed 6");
         else
             System.out.println("Failed 6");
 
-        if (intro.enroll(aashir, true))
+        if (intro.enroll(aashir, false))
             System.out.println("Passed 6a");
         else
             System.out.println("Failed 6a");
 
         intro.enroll(amani, false);
-        intro.enroll(aashir, true);
-        intro.enroll(chris, true);
+        intro.enroll(aashir, false);
+        intro.enroll(chris, false);
 
         if (comp_sci.enroll(alan, scratch, false))
             System.out.println("Failed 7");

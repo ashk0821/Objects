@@ -65,6 +65,7 @@ public class Course {
     }
 
     public boolean enroll(Student someStudent, boolean audited){
+
         if(enrolledStudents.length >= 20){
             return false;
         }

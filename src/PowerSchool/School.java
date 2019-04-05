@@ -67,7 +67,9 @@ public class School {
             return false;
         }
 
-        for (int i = 0; i < enrolledStudents(); i++) {
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            if (enrolledStudents[i].equals(null))
+                break;
             if (enrolledStudents[i].equals(someKid)) {
                 return false;
             }
@@ -123,13 +125,20 @@ public class School {
      * Student would have more than 10 Courses.
      */
     public boolean enroll(Student kid, Course someCourse, boolean audited) {
-        if (kid.schedule.length >= 10) {
-            return false;
+        for (int check=0; check<kid.schedule.length; check++) {
+            if (kid.schedule[check] == null)
+                break;
+            if (kid.schedule[check] == kid.schedule[kid.schedule.length-1])
+                return false;
         }
+
         for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i] == null)
+                break;
             if (schoolCourses[i].equals(someCourse)) {
                 if (schoolCourses[i].numberEnrolled() < 20) {
                     schoolCourses[i].enroll(kid, audited);
+                    return true;
                 }
             }
             if (schoolCourses[i] == null)

@@ -4,7 +4,7 @@ public class Student implements Comparable<Student>{
     String name;
     int gradYear;
     School Academy;
-    Course[] schedule;
+    Course[] schedule = new Course[10];
 
     public Student(String name, int gradYear, School Academy){
         this.name = name;
