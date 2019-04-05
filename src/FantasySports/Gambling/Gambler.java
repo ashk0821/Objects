@@ -12,7 +12,7 @@ public interface Gambler {
 
     public void winnerWas ();
 
-    public double balance();
+    public double finalBalance();
 
     public ArrayList<Double> gamblingHistory();
 }

@@ -9,7 +9,7 @@ public class AmbitiousGambler implements Gambler {
     public Team chosen;
     public Team winner;
     public Team loser;
-    int currentBalance=1000;
+    public int currentBalance=1000;
 
     public void bet (Team a, Team b) {
         if (a.getRating() + 5 >= b.getRating() && a.getRating() < b.getRating())
@@ -38,7 +38,7 @@ public class AmbitiousGambler implements Gambler {
         }
     }
 
-    public double balance() {
+    public double finalBalance() {
         if (currentBalance == 0)
             return 0;
 
@@ -63,7 +63,7 @@ public class AmbitiousGambler implements Gambler {
 
     public ArrayList<Double> gamblingHistory() {
         ArrayList<Double> history = new ArrayList<>();
-        history.add(balance());
+        history.add(finalBalance());
         return history;
     }
 
