@@ -66,11 +66,26 @@ public class Course {
 
     public boolean enroll(Student someStudent, boolean audited){
 
+        // where am i supposed to include audited??
+
         if(enrolledStudents.length >= 20){
             return false;
         }
 
-        //if()
+        if(someStudent.schedule.length >= 10)
+            return false;
+
+        for (int i=0; i<someStudent.schedule.length; i++) {
+            if (someStudent.schedule[i].equals(new Course(teacher, courseTitle, honors)))
+                return false;
+        }
+
+        for (int i=0; i<someStudent.schedule.length; i++) {
+            if (someStudent.schedule[i] == null) {
+                someStudent.schedule[i] = new Course(teacher, courseTitle, honors);
+                return true;
+            }
+        }
         return false;
     }
 }
