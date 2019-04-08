@@ -125,7 +125,7 @@ public class School {
      * Student would have more than 10 Courses.
      */
     public boolean enroll(Student kid, Course someCourse, boolean audited) {
-        for (int check=0; check<kid.schedule.length; check++) {
+        /*for (int check=0; check<kid.schedule.length; check++) {
             if (kid.schedule[check] == null)
                 break;
             if (kid.schedule[check] == kid.schedule[kid.schedule.length-1])
@@ -144,6 +144,10 @@ public class School {
             if (schoolCourses[i] == null)
                 break;
         }
+        return false;*/
+
+        if (someCourse.enroll(kid, audited))
+            return true;
         return false;
     }
 

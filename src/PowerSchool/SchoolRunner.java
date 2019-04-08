@@ -72,7 +72,7 @@ public class SchoolRunner {
         else
             System.out.println("Failed 6");
 
-        if (intro.enroll(aashir, false))
+        if (comp_sci.enroll(aashir, intro,false))
             System.out.println("Passed 6a");
         else
             System.out.println("Failed 6a");

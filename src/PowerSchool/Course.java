@@ -83,6 +83,12 @@ public class Course {
         for (int i=0; i<someStudent.schedule.length; i++) {
             if (someStudent.schedule[i] == null) {
                 someStudent.schedule[i] = new Course(teacher, courseTitle, honors);
+
+                for (int j=0; j<enrolledStudents.length; j++) {
+                    if (enrolledStudents[j] == null)
+                        enrolledStudents[j] = new Student(someStudent.name, someStudent.gradYear, someStudent.Academy);
+                }
+
                 return true;
             }
         }
