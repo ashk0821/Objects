@@ -123,7 +123,7 @@ public class School {
 
         schoolCourses[length] = c1;
 
-        return false;
+        return true;
     }
 
     /* Enrolls Student in Course and returns true if successful.

@@ -1,5 +1,6 @@
 package MazeSolver;
 
+import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ public class MazeSolver {
     public final int wrong_way_value = 3;
 
     public void solve(Node[][] maze) {
-        ArrayList<Node> paths = new ArrayList<Node>();
+       /* ArrayList<Node> paths = new ArrayList<Node>();
         MazeGenerator Maze = new MazeGenerator(maze);
         int[] start = Maze.startPoint();
         int[] end = Maze.end_point();
@@ -43,7 +44,7 @@ public class MazeSolver {
         }
         catch (Exception ex){
             System.out.println("Error");
-        }
+        }*/
     }
 
 }
