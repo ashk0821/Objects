@@ -6,7 +6,7 @@ public class Course {
 
     String courseTitle;
     String teacher;
-    Student[] enrolledStudents;
+    Student[] enrolledStudents = new Student[20];
     Grade[] grades;
     boolean honors;
 
@@ -70,21 +70,15 @@ public class Course {
 
         // where am i supposed to include audited??
 
-        for (int i=0; i<=enrolledStudents.length; i++) {
-            if (enrolledStudents[i] == null)
-                break;
-            if (i == enrolledStudents.length-1)
-                return false;
-        }
+        if (enrolledStudents[enrolledStudents.length-1] != null)
+            return false;
+
+        if (someStudent.schedule[someStudent.schedule.length-1] != null)
+            return false;
 
         for (int i=0; i<someStudent.schedule.length; i++) {
             if (someStudent.schedule[i] == null)
                 break;
-            if (i == someStudent.schedule.length-1)
-                return false;
-        }
-
-        for (int i=0; i<someStudent.schedule.length; i++) {
             if (someStudent.schedule[i].equals(new Course(teacher, courseTitle, honors)))
                 return false;
         }
