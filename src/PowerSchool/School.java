@@ -108,20 +108,15 @@ public class School {
     public boolean createClass(String Teacher, String title, boolean honors) {
         Course c1 = new Course(Teacher, title, honors);
         for (int i = 0; i < schoolCourses.length; i++) {
-            if (schoolCourses[i] == null)
+            if (schoolCourses[i] == null) {
+                schoolCourses[i] = c1;
                 break;
+            }
 
             if (schoolCourses[i].equals(c1)) {
                 return false;
             }
         }
-
-        int length = 0;
-
-        while (schoolCourses[length] != null)
-            length++;
-
-        schoolCourses[length] = c1;
 
         return true;
     }
