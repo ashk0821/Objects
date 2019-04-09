@@ -63,22 +63,16 @@ public class School {
     * Student is already enrolled at that school.
     */
     public boolean addStudent(Student someKid) {
-        if (enrolledStudents.length >= 300) {
-            return false;
-        }
+        int length;
 
-        for (int i = 0; i < enrolledStudents.length; i++) {
-            if (enrolledStudents[i].equals(null))
+        for (length=0; length<enrolledStudents.length; length++) {
+            if (enrolledStudents[length] == null)
                 break;
-            if (enrolledStudents[i].equals(someKid)) {
+            if (enrolledStudents[length].equals(someKid))
                 return false;
-            }
+            if (length == 300)
+                return false;
         }
-
-        int length = 0;
-
-        while (enrolledStudents[length] != null)
-            length += 1;
 
         enrolledStudents[length] = someKid;
         return true;

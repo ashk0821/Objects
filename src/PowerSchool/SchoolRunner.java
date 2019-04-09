@@ -26,15 +26,13 @@ public class SchoolRunner {
         else
             System.out.println("Failed 2a");
 
-        comp_sci.addStudent(ansh);
+        if (comp_sci.addStudent(ansh))
+            System.out.println("Passed 2b");
+        else
+            System.out.println("Failed 2b");
         comp_sci.addStudent(aashir);
         comp_sci.addStudent(chris);
         comp_sci.addStudent(amani);
-
-        int i=0;
-        while (comp_sci.enrolledStudents[i] != null) {
-            System.out.println(comp_sci.enrolledStudents[i]);
-        }
 
         comp_sci.unenrollStudent(amani);
 
