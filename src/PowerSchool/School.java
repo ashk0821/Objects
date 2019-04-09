@@ -91,7 +91,6 @@ public class School {
 
                     enrolledStudents[j] = enrolledStudents[j+1];
                 }
-                //Arrays.sort(enrolledStudents);
                 break;
             }
         }
