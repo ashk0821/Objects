@@ -45,14 +45,6 @@ public class SchoolRunner {
         else
             System.out.println("Failed 2c");
 
-        System.out.println(comp_sci.enrolledStudents());
-
-        int i=0;
-        while (comp_sci.enrolledStudents[i] != null) {
-            System.out.println(comp_sci.enrolledStudents[i].name);
-            i++;
-        }
-
         if (comp_sci.enrolledStudents() == 5)
             System.out.println("Passed 3");
         else

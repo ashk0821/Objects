@@ -85,8 +85,8 @@ public class School {
             if (enrolledStudents[i].equals(someKid)) {
                 enrolledStudents[i] = null;
 
-                for (int j=0; j<enrolledStudents.length; j++) {
-                    if (enrolledStudents[j] == null)
+                for (int j=i; j<enrolledStudents.length; j++) {
+                    if (enrolledStudents[j+1] == null)
                         break;
 
                     enrolledStudents[j] = enrolledStudents[j+1];
