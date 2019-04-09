@@ -1,5 +1,7 @@
 package PowerSchool;
 
+import java.util.Arrays;
+
 public class Course {
 
     String courseTitle;
@@ -68,12 +70,19 @@ public class Course {
 
         // where am i supposed to include audited??
 
-        if(enrolledStudents.length >= 20){
-            return false;
+        for (int i=0; i<=enrolledStudents.length; i++) {
+            if (enrolledStudents[i] == null)
+                break;
+            if (i == enrolledStudents.length-1)
+                return false;
         }
 
-        if(someStudent.schedule.length >= 10)
-            return false;
+        for (int i=0; i<someStudent.schedule.length; i++) {
+            if (someStudent.schedule[i] == null)
+                break;
+            if (i == someStudent.schedule.length-1)
+                return false;
+        }
 
         for (int i=0; i<someStudent.schedule.length; i++) {
             if (someStudent.schedule[i].equals(new Course(teacher, courseTitle, honors)))
@@ -93,5 +102,14 @@ public class Course {
             }
         }
         return false;
+    }
+
+    public void unenroll (Student someStudent) {
+        for (int i=0; i<enrolledStudents.length; i++) {
+            if (enrolledStudents[i].equals(someStudent)) {
+                enrolledStudents[i] = null;
+                Arrays.sort(enrolledStudents);
+            }
+        }
     }
 }

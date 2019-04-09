@@ -81,12 +81,25 @@ public class School {
     /* Removes a student to the school.
      */
     public void unenrollStudent(Student someKid) {
-        for (int i = 0; i < enrolledStudents(); i++) {
+        for (int i = 0; i < enrolledStudents.length; i++) {
             if (enrolledStudents[i].equals(someKid)) {
                 enrolledStudents[i] = null;
-                Arrays.sort(enrolledStudents);
+
+                for (int j=0; j<enrolledStudents.length; j++) {
+                    if (enrolledStudents[j] == null)
+                        break;
+
+                    enrolledStudents[j] = enrolledStudents[j+1];
+                }
+                //Arrays.sort(enrolledStudents);
                 break;
             }
+        }
+
+        for (int i=0; i<schoolCourses.length; i++) {
+            if (schoolCourses[i] == null)
+                break;
+            schoolCourses[i].unenroll(someKid);
         }
     }
 
@@ -140,9 +153,7 @@ public class School {
         }
         return false;*/
 
-        if (someCourse.enroll(kid, audited))
-            return true;
-        return false;
+        return (someCourse.enroll(kid, audited));
     }
 
     /* Unenrolls Student in Course and returns true if successful.
