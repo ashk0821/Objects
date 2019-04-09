@@ -152,6 +152,12 @@ public class School {
         }
         return false;*/
 
+        for (int i=0; i<schoolCourses.length; i++) {
+            if (schoolCourses[i].equals(someCourse))
+                break;
+            if (schoolCourses[i] == null)
+                return false;
+        }
         return (someCourse.enroll(kid, audited));
     }
 

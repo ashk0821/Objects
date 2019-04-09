@@ -53,20 +53,33 @@ public class SchoolRunner {
         Course intro = new Course ("Mr. Respass", "Intro to Comp Sci", false);
         Course scratch = new Course ("Mr. Billy", "Intro to Scratch", false);
 
-        comp_sci.createClass("Mr. Respass", "Intro to Comp Sci", false);
+        if (comp_sci.createClass( "Mr. Respass", "Intro to Comp Sci", false))
+            System.out.println("Passed 4a");
+        else
+            System.out.println("Failed 4a");
+
         comp_sci.createClass("Mr. Wang", "C and Data Structures", true);
         comp_sci.createClass("Mr. Isecke", "AP Comp Sci", true);
         comp_sci.createClass("Mr. Isecke", "Advanced Topics", true);
 
         if (comp_sci.createClass("Mr. Respass", "Intro to Comp Sci", false))
-            System.out.println("Failed 4a");
+            System.out.println("Failed 4b");
         else
-            System.out.println("Passed 4a");
+            System.out.println("Passed 4b");
 
         if (Arrays.equals(comp_sci.getCourses(), comp_sci.schoolCourses))
             System.out.println("Passed 5");
         else
             System.out.println("Failed 5");
+
+        for (int i=0; i<comp_sci.getCourses().length; i++) {
+            if (comp_sci.getCourses()[i].equals(intro)) {
+                System.out.println("Passed 5a");
+                break;
+            }
+            if (comp_sci.getCourses()[i] == null)
+                System.out.println("Failed 5a");
+        }
 
         if (comp_sci.enroll(alan, intro, false))
             System.out.println("Passed 6");

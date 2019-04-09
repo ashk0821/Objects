@@ -77,13 +77,6 @@ public class Course {
             return false;
 
         for (int i=0; i<someStudent.schedule.length; i++) {
-            if (someStudent.schedule[i] == null)
-                break;
-            if (someStudent.schedule[i].equals(new Course(teacher, courseTitle, honors)))
-                return false;
-        }
-
-        for (int i=0; i<someStudent.schedule.length; i++) {
             if (someStudent.schedule[i] == null) {
                 someStudent.schedule[i] = new Course(teacher, courseTitle, honors);
 
@@ -91,9 +84,11 @@ public class Course {
                     if (enrolledStudents[j] == null)
                         enrolledStudents[j] = new Student(someStudent.name, someStudent.gradYear, someStudent.Academy);
                 }
-
                 return true;
             }
+
+            else if (someStudent.schedule[i].equals(new Course(teacher, courseTitle, honors)))
+                return false;
         }
         return false;
     }
