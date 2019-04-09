@@ -36,7 +36,15 @@ public class School {
     /* Returns the array of courses. (Deep copy)
      */
     public Course[] getCourses() {
-        Course[] ret = new Course[schoolCourses.length];
+       int length = 0;
+
+       for (int i=0; i<schoolCourses.length; i++) {
+           if (schoolCourses[i] == null)
+               length++;
+       }
+
+        Course[] ret = new Course[length];
+
         for (int i = 0; i < ret.length; i++) {
             ret[i] = schoolCourses[i];
         }
@@ -107,15 +115,25 @@ public class School {
      */
     public boolean createClass(String Teacher, String title, boolean honors) {
         Course c1 = new Course(Teacher, title, honors);
-        for (int i = 0; i < schoolCourses.length; i++) {
+        /*for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i].equals(c1)) {
+                return false;
+            }
             if (schoolCourses[i] == null) {
                 schoolCourses[i] = c1;
                 break;
             }
+        }
+        return true;*/
 
-            if (schoolCourses[i].equals(c1)) {
+        for (int i=0; i<getCourses().length; i++) {
+            if (getCourses()[i].equals(c1))
                 return false;
-            }
+        }
+
+        for (int i=0; i<schoolCourses.length; i++) {
+            if (schoolCourses[i] == null)
+                schoolCourses[i] = c1;
         }
 
         return true;
