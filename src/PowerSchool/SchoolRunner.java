@@ -69,80 +69,66 @@ public class SchoolRunner {
         else
             System.out.println("Passed 4b");
 
-        if (Arrays.equals(comp_sci.getCourses(), comp_sci.schoolCourses))
+        if (comp_sci.enroll(alan, intro, false))
             System.out.println("Passed 5");
         else
             System.out.println("Failed 5");
 
-        for (int i=0; i<comp_sci.getCourses().length; i++) {
-            if (comp_sci.getCourses()[i].equals(intro)) {
-                System.out.println("Passed 5a");
-                break;
-            }
-            if (comp_sci.getCourses()[i] == null)
-                System.out.println("Failed 5a");
-        }
-
-        if (comp_sci.enroll(alan, intro, false))
-            System.out.println("Passed 6");
-        else
-            System.out.println("Failed 6");
-
         if (comp_sci.enroll(aashir, intro,false))
-            System.out.println("Passed 6a");
+            System.out.println("Passed 5a");
         else
-            System.out.println("Failed 6a");
+            System.out.println("Failed 5a");
 
         intro.enroll(amani, false);
         intro.enroll(aashir, false);
         intro.enroll(chris, false);
 
         if (comp_sci.enroll(alan, scratch, false))
-            System.out.println("Failed 7");
+            System.out.println("Failed 6");
         else
-            System.out.println("Passed 7");
+            System.out.println("Passed 6");
 
         if (comp_sci.unenroll(alan, intro))
+            System.out.println("Passed 7");
+        else
+            System.out.println("Failed 7");
+
+        if (alan.getName().equals("Alan"))
             System.out.println("Passed 8");
         else
             System.out.println("Failed 8");
 
-        if (alan.getName().equals("Alan"))
-            System.out.println("Passed 9");
-        else
-            System.out.println("Failed 9");
-
         if (aashir.getName().equals("Amani"))
-            System.out.println("Failed 10: just like Mr. Respass");
+            System.out.println("Failed 9");
+        else
+            System.out.println("Passed 9");
+
+        if (chris.getGradyear() == 2022)
+            System.out.println("Failed 10");
         else
             System.out.println("Passed 10");
 
-        if (chris.getGradyear() == 2022)
-            System.out.println("Failed 11, although I can see why");
-        else
-            System.out.println("Passed 11, but it is very unclear why");
-
         if (ansh.getGradyear() == 2021)
-            System.out.println("Passed 11b");
+            System.out.println("Passed 10a");
         else
-            System.out.println("Failed 11b");
+            System.out.println("Failed 10a");
 
         if (alan.getAcademy() == comp_sci)
-            System.out.println("Passed 12");
+            System.out.println("Passed 11");
         else
-            System.out.println("Failed 12");
+            System.out.println("Failed 11");
 
         // after get GPA are done as well as compare to, we can implement more tests
 
         if (intro.courseTitle().equals("Intro to Comp Sci"))
+            System.out.println("Passed 12");
+        else
+            System.out.println("Failed 12");
+
+        if (intro.courseTeacher().equals("Mr. Respass"))
             System.out.println("Passed 13");
         else
             System.out.println("Failed 13");
-
-        if (intro.courseTeacher().equals("Mr. Respass"))
-            System.out.println("Passed 14");
-        else
-            System.out.println("Failed 14");
 
         intro.setGrade(alan, 100);
         intro.setGrade(aashir, 99);
@@ -151,17 +137,15 @@ public class SchoolRunner {
         intro.setGrade(ansh, 73);
 
         if (intro.topStudent() == alan)
+            System.out.println("Passed 14");
+        else
+            System.out.println("Failed 14");
+
+        if (Arrays.equals(intro.enrolledStudents, intro.enrolledStudents()))
             System.out.println("Passed 15");
         else
             System.out.println("Failed 15");
 
-        if (Arrays.equals(intro.enrolledStudents, intro.enrolledStudents()))
-            System.out.println("Passed 16");
-        else
-            System.out.println("Failed 16");
-
         // what is gradeOf(student)?
-
-
     }
 }

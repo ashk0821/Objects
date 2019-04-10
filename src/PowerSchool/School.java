@@ -39,7 +39,7 @@ public class School {
        int length = 0;
 
        for (int i=0; i<schoolCourses.length; i++) {
-           if (schoolCourses[i] == null)
+           if (schoolCourses[i] != null)
                length++;
        }
 
@@ -127,16 +127,18 @@ public class School {
         return true;*/
 
         for (int i=0; i<getCourses().length; i++) {
-            if (getCourses()[i].equals(c1))
+            if (getCourses()[i].teacher.equals(c1.teacher)&&getCourses()[i].courseTitle.equals(c1.courseTitle))
                 return false;
         }
 
         for (int i=0; i<schoolCourses.length; i++) {
-            if (schoolCourses[i] == null)
+            if (schoolCourses[i] == null) {
                 schoolCourses[i] = c1;
+                return true;
+            }
         }
 
-        return true;
+        return false;
     }
 
     /* Enrolls Student in Course and returns true if successful.
@@ -166,10 +168,10 @@ public class School {
         return false;*/
 
         for (int i=0; i<schoolCourses.length; i++) {
-            if (schoolCourses[i].equals(someCourse))
-                break;
             if (schoolCourses[i] == null)
                 return false;
+            if (schoolCourses[i].equals(someCourse))
+                break;
         }
         return (someCourse.enroll(kid, audited));
     }
@@ -179,24 +181,26 @@ public class School {
      */
     public boolean unenroll(Student kid, Course someCourse) {
         for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i] == null)
+                return false;
+
             if (schoolCourses[i].equals(someCourse)) {
                 for (int j = 0; i < schoolCourses[i].enrolledStudents.length; j++) {
+                    if (schoolCourses[i].enrolledStudents[j] == null) {
+                        return false;
+                    }
+
                     if (schoolCourses[i].enrolledStudents[j].equals(kid)) {
                         schoolCourses[i].enrolledStudents[j] = null;
                         Arrays.sort(schoolCourses[i].enrolledStudents);
                         return true;
-                    }
-
-                    if (schoolCourses[i].enrolledStudents[j] == null) {
-                        return false;
                     }
                 }
 
                 return false;
             }
 
-            if (schoolCourses[i] == null)
-                return false;
+
         }
         return false;
     }

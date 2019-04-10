@@ -7,7 +7,7 @@ public class Course {
     String courseTitle;
     String teacher;
     Student[] enrolledStudents = new Student[20];
-    Grade[] grades;
+    Grade[] grades = new Grade[20];
     boolean honors;
 
     public Course(String teacher, String title, boolean honors){
@@ -50,6 +50,9 @@ public class Course {
     public Student topStudent(){
         int highestGradeIndex = 0;
         for(int i = 1; i < grades.length; i++){
+            if (grades[i] == null)
+                return null;
+
             if(grades[i].gradeValue() > grades[highestGradeIndex].gradeValue()){
                 highestGradeIndex = i;
             }
