@@ -1,46 +1,31 @@
 package MazeSolver;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Application;
-
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+import javafx.scene.shape.*;
+import javafx.animation.*;
+import javafx.application.*;
+import javafx.event.*;
 import javafx.scene.*;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-
+import javafx.stage.*;
+import javafx.util.*;
 import java.io.*;
-
 import java.util.Scanner;
 
 public class MazeAnimator extends Application {
-    public boolean maze_updated = false;
-    public final double TIME_DELAY = .1;
-    public boolean solving_stopped = false;
-    public Timeline timeline;
-    public int[] current_node;
-    public boolean solving = false;
-    public Stage stage;
-    public int solver_count = 0;
-    private int solver_current = 0;
-    public final int width = 800;
-    public final int length = 800;
-    private Node[][] maze;
+    private boolean pathUpdated = false;
+    private boolean solvingStopped = false;
+    private Timeline timeline;
+    private int[] current_node;
+    private boolean solving = false;
+    private Stage stage;
+    private int solver_count = 0;
+
+    private Cell[][] maze;
     private MazeGenerator Maze;
     public static boolean solver_called = false;
     public String file_name = "maze.txt";
     public final int button_size = 100;
-    private ComboBox<String> fileListBox;
-    private ObservableList<String> fileListOptions;
 
     public void start(Stage stage) {
         this.stage = stage;
@@ -50,6 +35,7 @@ public class MazeAnimator extends Application {
 
 
     public void maze_gen_screen() {
+
         FlowPane root2 = new FlowPane();
         root2.setPadding(new javafx.geometry.Insets(20));
         root2.setHgap(10);
@@ -97,6 +83,9 @@ public class MazeAnimator extends Application {
 
 
     public void maze_page() throws FileNotFoundException {
+        double TIME_DELAY = .05;
+        int width = 400;
+        int length = 400;
         Scanner file = new Scanner(new FileReader(file_name));
         int lines = 0;
         int longest_line = 0;
@@ -175,31 +164,25 @@ public class MazeAnimator extends Application {
             }
         });
 
-        javafx.scene.control.Button btn_save = new javafx.scene.control.Button();
-        btn_save.setText("Save");
-
-
         javafx.scene.control.Button btn_back = new javafx.scene.control.Button();
         btn_back.setText("Back");
         btn_back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 solver_called = false;
-                solving_stopped = false;
+                solvingStopped = false;
                 MazeAnimator temp = new MazeAnimator();
-                try {
 
-                    temp.stage = stage;
-                    temp.maze_gen_screen();
-                } catch (Exception ex) {
-                }
+                temp.stage = stage;
+                temp.maze_gen_screen();
+
             }
         });
 
-        if (solving && !maze_updated && !solving_stopped) {
+        if (solving && !pathUpdated && !solvingStopped) {
             timeline = new Timeline(
                     new KeyFrame(Duration.seconds(TIME_DELAY), e -> {
-                        if (!solving_stopped) {
+                        if (!solvingStopped) {
                             try {
                                 maze[current_node[0]][current_node[1]].setWallCode(5);
                                 current_node = animate_solution(current_node);
@@ -211,11 +194,11 @@ public class MazeAnimator extends Application {
                                 r.setHeight(4);
                                 r.setFill(Color.GREEN);
                                 g.getChildren().add(r);*/
-                                maze_updated = true;
+                                pathUpdated = true;
                                 maze_page();
 
                                 if (current_node == null || current_node[0] == Maze.end_point()[0] && current_node[1] == Maze.end_point()[1]) {
-                                    solving_stopped = true;
+                                    solvingStopped = true;
                                     timeline.stop();
                                     MazeAnimator temp = new MazeAnimator();
                                     temp.stage = stage;
@@ -233,14 +216,14 @@ public class MazeAnimator extends Application {
             timeline.play();
         }
         else
-            maze_updated =false;
-        if (solving_stopped)
+            pathUpdated =false;
+        if (solvingStopped)
             timeline.stop();
 
         if (solver_called) {
-            root.getChildren().addAll(g, btn_save, btn_back);
+            root.getChildren().addAll(g, btn_back);
         } else
-            root.getChildren().addAll(g, btn_solve, btn_save, btn_back);
+            root.getChildren().addAll(g, btn_solve, btn_back);
 
         stage.setTitle("Maze");
 
@@ -258,7 +241,7 @@ public class MazeAnimator extends Application {
     }
 
     public void start_animation() {
-        if (!solving_stopped) {
+        if (!solvingStopped) {
             solving = true;
 
             for (int i = 0; i < maze.length; i++) {
@@ -272,7 +255,7 @@ public class MazeAnimator extends Application {
             maze[current_node[0]][current_node[1]].setWallCode(4);
 
             try {
-                Maze.write_to_file(maze);
+                Maze.writeMazeASCII(maze);
                 maze_page();
 
             } catch (Exception ex) {
@@ -281,8 +264,8 @@ public class MazeAnimator extends Application {
     }
 
     public int[] animate_solution(int[] current_node) {
-        if (!solving_stopped) {
-            Node temp = maze[current_node[0]][current_node[1]].next_node();
+        if (!solvingStopped) {
+            Cell temp = maze[current_node[0]][current_node[1]].next_node();
             try {
                 current_node[0] = temp.horizontalNode;
                 current_node[1] = temp.verticalNode;
@@ -291,7 +274,7 @@ public class MazeAnimator extends Application {
 
             maze[current_node[0]][current_node[1]].setWallCode( 4);
             try {
-                Maze.write_to_file(maze);
+                Maze.writeMazeASCII(maze);
             } catch (Exception ex) {
             }
 

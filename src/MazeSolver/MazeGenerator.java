@@ -6,7 +6,7 @@ import java.util.*;
 public class MazeGenerator {
     public final int uncheckedWallCode = 0;
     public final int checkedWallCode = 1;
-    public Node [][] maze;
+    public Cell [][] maze;
     private int size;
     private int [] startingPoint;
 
@@ -14,16 +14,16 @@ public class MazeGenerator {
         this.startingPoint = startingPoint;
         this.size = size;
 
-        maze = new Node[this.size][this.size];
+        maze = new Cell[this.size][this.size];
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                maze[i][j] = new Node(i, j, maze);
+                maze[i][j] = new Cell(i, j, maze);
                 maze[i][j].setWallCode(uncheckedWallCode);
             }
         }
     }
 
-    public MazeGenerator (Node[][] maze){
+    public MazeGenerator (Cell[][] maze){
         this.maze = maze;
         this.size = maze.length;
         startingPoint = startPoint();
@@ -33,7 +33,7 @@ public class MazeGenerator {
         int[] startingPoint = new int[2];
 
         for (int j = 0; j < maze[0].length; j++) {
-            if (!maze[0][j].top_wall) {
+            if (!maze[0][j].topWall) {
                 startingPoint[0] = maze[0][j].horizontalNode;
                 startingPoint[1] = maze[0][j].verticalNode;
             }
@@ -44,14 +44,14 @@ public class MazeGenerator {
 
     public boolean generate() throws IOException{
         maze[startingPoint[0]][startingPoint[1]].setWallCode(checkedWallCode);
-        maze[startingPoint[0]][startingPoint[1]].top_wall = false;
+        maze[startingPoint[0]][startingPoint[1]].topWall = false;
 
-        ArrayList<Node> list = new ArrayList<>();
+        ArrayList<Cell> list = new ArrayList<>();
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
                 if (maze[i][j].getWallCode() == checkedWallCode) {
-                    ArrayList<Node> temp = maze[i][j].uncheckedNodes();
-                    for (Node node : temp) {
+                    ArrayList<Cell> temp = maze[i][j].uncheckedNodes();
+                    for (Cell node : temp) {
                         list.add(node);
                     }
                 }
@@ -61,35 +61,35 @@ public class MazeGenerator {
         if (list.size() == 0) {
             Random r = new Random();
             int rand_int = r.nextInt(size);
-            maze[maze.length - 1][rand_int].bot_wall = false;
-            write_to_file();
+            maze[maze.length - 1][rand_int].bottomWall = false;
+            writeMazeASCII();
             return true;
         }
 
         Random rand = new Random();
-        Node current_node = list.get(rand.nextInt(list.size()));
-        list = current_node.checkedNodes();
+        Cell randomNode = list.get(rand.nextInt(list.size()));
+        list = randomNode.checkedNodes();
         Random rand2 = new Random();
-        Node connection_node = list.get(rand2.nextInt(list.size()));
+        Cell connection_node = list.get(rand2.nextInt(list.size()));
 
-        if (connection_node.verticalNode - 1 == current_node.verticalNode)
-            current_node.open_right();
-        else if (connection_node.verticalNode + 1 == current_node.verticalNode)
-            current_node.open_left();
-        else if (connection_node.horizontalNode - 1 == current_node.horizontalNode)
-            current_node.open_bot();
-        else if (connection_node.horizontalNode + 1 == current_node.horizontalNode)
-            current_node.open_top();
+        if (connection_node.verticalNode - 1 == randomNode.verticalNode)
+            randomNode.open_right();
+        else if (connection_node.verticalNode + 1 == randomNode.verticalNode)
+            randomNode.open_left();
+        else if (connection_node.horizontalNode - 1 == randomNode.horizontalNode)
+            randomNode.open_bot();
+        else if (connection_node.horizontalNode + 1 == randomNode.horizontalNode)
+            randomNode.open_top();
 
-        current_node.setWallCode(checkedWallCode);
+        randomNode.setWallCode(checkedWallCode);
         return false;
     }
 
-    public void write_to_file() throws IOException {
+    public void writeMazeASCII() throws IOException {
         String write_to_maze = "";
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                if (maze[i][j].top_wall) {
+                if (maze[i][j].topWall) {
                     write_to_maze += ("---");
                 } else
                     write_to_maze += ("   ");
@@ -97,7 +97,7 @@ public class MazeGenerator {
             write_to_maze += "\n";
 
             for (int j = 0; j < maze[i].length; j++) {
-                if (maze[i][j].left_wall) {
+                if (maze[i][j].leftWall) {
                     if (j == maze[i].length - 1)
                         write_to_maze += "|"+maze[i][j].getWallCode()+ "|";
                     else
@@ -116,7 +116,7 @@ public class MazeGenerator {
 
         for (int j = 0; j < maze[maze.length - 1].length; j++) {
 
-            if (maze[maze.length - 1][j].bot_wall)
+            if (maze[maze.length - 1][j].bottomWall)
                 write_to_maze += "---";
             else
                 write_to_maze += "   ";
@@ -139,11 +139,12 @@ public class MazeGenerator {
             ex.printStackTrace();
         }
     }
-    public void write_to_file(Node[][] temp_maze) throws IOException {
+    public void writeMazeASCII(Cell[][] temp_maze) throws IOException {
+
         String write_to_maze = "";
         for (int i = 0; i < temp_maze.length; i++) {
             for (int j = 0; j < temp_maze[i].length; j++) {
-                if (temp_maze[i][j].top_wall) {
+                if (temp_maze[i][j].topWall) {
                     write_to_maze += ("---");
                 } else
                     write_to_maze += ("   ");
@@ -151,16 +152,16 @@ public class MazeGenerator {
             write_to_maze += "\n";
 
             for (int j = 0; j < temp_maze[i].length; j++) {
-                if (temp_maze[i][j].left_wall) {
+                if (temp_maze[i][j].leftWall) {
                     if (j == temp_maze[i].length - 1)
-                        write_to_maze += "|"+maze[i][j].getWallCode()+ "|";
+                        write_to_maze += "|"+ maze[i][j].getWallCode() + "|";
                     else
-                        write_to_maze += ("|"+maze[i][j].getWallCode()+ " ");
+                        write_to_maze += ("|"+ maze[i][j].getWallCode() + " ");
                 } else {
                     if (j == temp_maze[i].length - 1)
-                        write_to_maze += " "+maze[i][j].getWallCode()+ "|";
+                        write_to_maze += " "+ maze[i][j].getWallCode() + "|";
                     else
-                        write_to_maze += (" "+maze[i][j].getWallCode()+ " ");
+                        write_to_maze += (" "+ maze[i][j].getWallCode() + " ");
                 }
             }
             write_to_maze += "\n";
@@ -169,7 +170,7 @@ public class MazeGenerator {
 
         for (int j = 0; j < temp_maze[temp_maze.length - 1].length; j++) {
 
-            if (temp_maze[temp_maze.length - 1][j].bot_wall)
+            if (temp_maze[temp_maze.length - 1][j].bottomWall)
                 write_to_maze += "---";
             else
                 write_to_maze += "   ";
@@ -185,7 +186,7 @@ public class MazeGenerator {
 
         int[] end = new int[2];
         for (int i = 0; i < maze.length; i++) {
-            if(!(maze[maze.length-1][i].bot_wall)){
+            if(!(maze[maze.length-1][i].bottomWall)){
                 end[0] = i;
                 end[1] = maze.length-1;
             }
