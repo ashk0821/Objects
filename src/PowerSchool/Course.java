@@ -26,6 +26,9 @@ public class Course {
 
     public Grade gradeOf(Student someStudent){
         for(int i = 0; i < enrolledStudents.length; i++){
+            if (enrolledStudents[i] == null)
+                return null;
+
             if(enrolledStudents[i].equals(someStudent)){
                 return grades[i];
             }
@@ -41,7 +44,7 @@ public class Course {
         Student[] ret = new Student[enrolledStudents.length];
 
         for(int i = 0; i < ret.length; i++){
-            ret[i] = new Student(enrolledStudents[i].name, enrolledStudents[i].gradYear, enrolledStudents[i].academy);
+            ret[i] = new Student(enrolledStudents[i].name, enrolledStudents[i].gradYear, enrolledStudents[i].Academy);
         }
 
         return ret;
@@ -69,31 +72,10 @@ public class Course {
         }
     }
 
-    public boolean enroll(Student someStudent, boolean audited){
-
-        // where am i supposed to include audited??
-
+    public boolean enroll(Student someStudent, boolean audited) {
         if (enrolledStudents[enrolledStudents.length-1] != null)
             return false;
-
-        if (someStudent.schedule[someStudent.schedule.length-1] != null)
-            return false;
-
-        for (int i=0; i<someStudent.schedule.length; i++) {
-            if (someStudent.schedule[i] == null) {
-                someStudent.schedule[i] = new Course(teacher, courseTitle, honors);
-
-                for (int j=0; j<enrolledStudents.length; j++) {
-                    if (enrolledStudents[j] == null)
-                        enrolledStudents[j] = new Student(someStudent.name, someStudent.gradYear, someStudent.academy);
-                }
-                return true;
-            }
-
-            else if (someStudent.schedule[i].equals(new Course(teacher, courseTitle, honors)))
-                return false;
-        }
-        return false;
+        return someStudent.addCourse(new Course(teacher, courseTitle, honors));
     }
 
     public void unenroll (Student someStudent) {

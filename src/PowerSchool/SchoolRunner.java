@@ -52,6 +52,9 @@ public class SchoolRunner {
 
         Course intro = new Course ("Mr. Respass", "Intro to Comp Sci", false);
         Course scratch = new Course ("Mr. Billy", "Intro to Scratch", false);
+        Course cData = new Course ("Mr. Wang", "C and Data Structures", true);
+        Course ap = new Course ("Mr. Isecke", "AP Comp Sci", true);
+        Course advanced = new Course ("Mr. Isecke", "Advanced Topics", true);
 
         if (comp_sci.createClass( "Mr. Respass", "Intro to Comp Sci", false))
             System.out.println("Passed 4a");
@@ -83,12 +86,12 @@ public class SchoolRunner {
         intro.enroll(aashir, false);
         intro.enroll(chris, false);
 
-        if (comp_sci.enroll(alan, scratch, false))
+        if (alan.addCourse(scratch))
             System.out.println("Failed 6");
         else
             System.out.println("Passed 6");
 
-        if (comp_sci.unenroll(alan, intro))
+        if (alan.dropCourse(intro))
             System.out.println("Passed 7");
         else
             System.out.println("Failed 7");
@@ -130,22 +133,14 @@ public class SchoolRunner {
         else
             System.out.println("Failed 13");
 
-        intro.setGrade(alan, 100);
-        intro.setGrade(aashir, 99);
-        intro.setGrade(chris, 95);
-        intro.setGrade(amani, 65);
-        intro.setGrade(ansh, 73);
+        alan.addCourse(cData);
+        alan.addCourse(ap);
+        alan.addCourse(advanced);
 
-        if (intro.topStudent() == alan)
-            System.out.println("Passed 14");
-        else
-            System.out.println("Failed 14");
+        cData.setGrade(alan, 1000);
+        ap.setGrade(alan, 890);
+        advanced.setGrade(alan, 860);
 
-        if (Arrays.equals(intro.enrolledStudents, intro.enrolledStudents()))
-            System.out.println("Passed 15");
-        else
-            System.out.println("Failed 15");
-
-        // what is gradeOf(student)?
+        System.out.println(alan.getGPA());
     }
 }
