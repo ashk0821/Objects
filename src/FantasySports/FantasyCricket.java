@@ -10,14 +10,10 @@ import FantasySports.Sports.Team;
 
 public class FantasyCricket {
     public static void main(String[] args) {
-        Team chelsea = new Team();
-        chelsea.team_name = "Chelsea";
-        Team real_madrid = new Team();
-        real_madrid.team_name = "Real Madrid";
-        Team liverpool = new Team();
-        liverpool.team_name = "Liverpool";
-        Team barca = new Team();
-        barca.team_name = "Barcelona";
+        Team chelsea = new Team(0, 0, 0, "Chelsea", null);
+        Team real_madrid = new Team(0, 0, 0, "Real Madrid", null);
+        Team liverpool = new Team(0, 0, 0, "Liverpool", null);
+        Team barca = new Team(0, 0, 0, "Barcelona", null);
 
         Player alan = new Player(75, 40, 95, 80, 0,"Alan", chelsea);
         Player eden = new Player(95, 35, 95, 45, 0, "Eden Hazard", chelsea);
@@ -39,6 +35,11 @@ public class FantasyCricket {
         Coach jurgen = new Coach(85, 0, liverpool, "Jurgen Klopp");
         Coach zidane = new Coach(99, 0, real_madrid, "Zinedine Zidane");
         Coach ernesto = new Coach(55, 0, barca, "Ernesto Valverde");
+
+        chelsea.coach = sarri;
+        liverpool.coach = jurgen;
+        real_madrid.coach = zidane;
+        barca.coach = ernesto;
 
         System.out.println(alan.toString());
         System.out.println(eden.toString());

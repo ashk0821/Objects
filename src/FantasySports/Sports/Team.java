@@ -14,6 +14,14 @@ public class Team implements SportsProfessional{
     int teamBonusPoints = 0; // since team rating is just an average, this is just an account of W/L
     ArrayList<Player> players = new ArrayList<>();
 
+    public Team(int team_morale, int number_of_players, int teamFinalRating, java.lang.String team_name, Coach coach) {
+        this.team_morale = team_morale;
+        this.number_of_players = number_of_players;
+        this.teamFinalRating = teamFinalRating;
+        this.team_name = team_name;
+        this.coach = coach;
+    }
+
     public void changeRating (boolean gameResult) {
         if (gameResult)
             teamBonusPoints ++;
@@ -22,7 +30,7 @@ public class Team implements SportsProfessional{
     }
 
     public int changeMorale (boolean gameResult) {
-        Team result = new Team();
+        Team result = new Team(team_morale, number_of_players, teamFinalRating, team_name, coach);
         result.gamePlayed(gameResult);
 
         if (gameResult)
@@ -52,9 +60,9 @@ public class Team implements SportsProfessional{
     public Team playGame (Team opponent) {
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
-        Team team = new Team();
+        Team team = new Team(team_morale, number_of_players, teamFinalRating, team_name, coach);
         int myRating = team.getFinalRating();
-        opponent = new Team();
+        opponent = new Team(opponent.team_morale, opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
         int yourRating = opponent.getFinalRating();
 
         int ratingDifference = Math.abs(myRating-yourRating);
@@ -74,7 +82,7 @@ public class Team implements SportsProfessional{
     }
 
     private void gamePlayed (boolean did_i_win) { // calls on playGame
-        Team opponent = new Team();
+        Team opponent = new Team(team_morale, number_of_players, teamFinalRating, team_name, coach);
         if (playGame(opponent) == opponent)
             did_i_win =  false;
         else
