@@ -235,7 +235,7 @@ public class MazeAnimator extends Application {
     public void solve_maze() {
         if (!solver_called) {
             MazeSolver solver = new MazeSolver();
-            solver.solve(maze);
+            //solver.solve(maze);
             start_animation();
         }
     }

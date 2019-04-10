@@ -13,6 +13,16 @@ public class Player implements SportsProfessional{
     public java.lang.String name;
     public Team team;
 
+    public Player(int speed, int catching, int stamina, int power, int morale, java.lang.String name, Team team) {
+        this.speed = speed;
+        this.catching = catching;
+        this.stamina = stamina;
+        this.power = power;
+        this.morale = morale;
+        this.name = name;
+        this.team = team;
+    }
+
     public void changeRating (boolean gameResult) {
         Random stat_to_change = new Random();
         int stat = stat_to_change.nextInt(3);

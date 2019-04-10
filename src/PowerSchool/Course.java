@@ -1,11 +1,13 @@
 package PowerSchool;
 
+import java.util.Arrays;
+
 public class Course {
 
     String courseTitle;
     String teacher;
-    Student[] enrolledStudents;
-    Grade[] grades;
+    Student[] enrolledStudents = new Student[20];
+    Grade[] grades = new Grade[20];
     boolean honors;
 
     public Course(String teacher, String title, boolean honors){
@@ -14,7 +16,7 @@ public class Course {
         this.honors = honors;
     }
 
-    public String courstTitle(){
+    public String courseTitle(){
         return courseTitle;
     }
 
@@ -23,8 +25,8 @@ public class Course {
     }
 
     public Grade gradeOf(Student someStudent){
-        for(int i = 0; i < enrolledStudents.length; i++){
-            if(enrolledStudents[i].equals(someStudent)){
+        for(int i = 0; i < enrolledStudents().length; i++){
+            if(enrolledStudents()[i].equals(someStudent)){
                 return grades[i];
             }
         }
@@ -32,14 +34,21 @@ public class Course {
     }
 
     public int numberEnrolled(){
-        return enrolledStudents.length;
+        return enrolledStudents().length;
     }
 
     public Student[] enrolledStudents(){
-        Student[] ret = new Student[enrolledStudents.length];
+        int length = 0;
 
-        for(int i = 0; i < ret.length; i++){
-            ret[i] = new Student(enrolledStudents[i].name, enrolledStudents[i].gradYear, enrolledStudents[i].Academy);
+        for (int i=0; i<enrolledStudents.length; i++) {
+            if (enrolledStudents[i] != null)
+                length++;
+        }
+
+        Student[] ret = new Student[length];
+
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = enrolledStudents[i];
         }
 
         return ret;
@@ -48,28 +57,37 @@ public class Course {
     public Student topStudent(){
         int highestGradeIndex = 0;
         for(int i = 1; i < grades.length; i++){
+            if (grades[i] == null)
+                return null;
+
             if(grades[i].gradeValue() > grades[highestGradeIndex].gradeValue()){
                 highestGradeIndex = i;
             }
         }
 
-        return enrolledStudents[highestGradeIndex];
+        return enrolledStudents()[highestGradeIndex];
     }
 
     public void setGrade(Student someStudent, int grade){
-        for(int i = 0; i < enrolledStudents.length; i++){
-            if(someStudent.equals(enrolledStudents[i])){
+        for(int i = 0; i < enrolledStudents().length; i++){
+            if(someStudent.equals(enrolledStudents()[i])){
                 grades[i].grade = grade;
             }
         }
     }
 
-    public boolean enroll(Student someStudent, boolean audited){
-        if(enrolledStudents.length >= 20){
+    public boolean enroll(Student someStudent, boolean audited) {
+        if (enrolledStudents[enrolledStudents.length-1] != null)
             return false;
-        }
+        return someStudent.addCourse(new Course(teacher, courseTitle, honors));
+    }
 
-        //if()
-        return false;
+    public void unenroll (Student someStudent) {
+        for (int i=0; i<enrolledStudents().length; i++) {
+            if (enrolledStudents[i].equals(someStudent)) {
+                enrolledStudents[i] = null;
+                Arrays.sort(enrolledStudents);
+            }
+        }
     }
 }

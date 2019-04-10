@@ -19,12 +19,16 @@ public class Grade {
         this.audited = audited;
         this.course = course;
 
-        if(honors){
-            grade += grade * 0.05;
-        }
+
     }
 
     public int gradeValue(){
+        if (audited())
+            grade = -1;
+
+        if(honors())
+            grade += grade * 0.05;
+
         return grade;
     }
 
