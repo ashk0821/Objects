@@ -167,10 +167,8 @@ public class School {
         }
         return false;*/
 
-        for (int i=0; i<schoolCourses.length; i++) {
-            if (schoolCourses[i] == null)
-                return false;
-            if (schoolCourses[i].equals(someCourse))
+        for (int i=0; i<getCourses().length; i++) {
+            if (getCourses()[i].equals(someCourse))
                 break;
         }
         return (someCourse.enroll(kid, audited));

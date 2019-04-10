@@ -41,7 +41,7 @@ public class Course {
         Student[] ret = new Student[enrolledStudents.length];
 
         for(int i = 0; i < ret.length; i++){
-            ret[i] = new Student(enrolledStudents[i].name, enrolledStudents[i].gradYear, enrolledStudents[i].Academy);
+            ret[i] = new Student(enrolledStudents[i].name, enrolledStudents[i].gradYear, enrolledStudents[i].academy);
         }
 
         return ret;
@@ -85,7 +85,7 @@ public class Course {
 
                 for (int j=0; j<enrolledStudents.length; j++) {
                     if (enrolledStudents[j] == null)
-                        enrolledStudents[j] = new Student(someStudent.name, someStudent.gradYear, someStudent.Academy);
+                        enrolledStudents[j] = new Student(someStudent.name, someStudent.gradYear, someStudent.academy);
                 }
                 return true;
             }

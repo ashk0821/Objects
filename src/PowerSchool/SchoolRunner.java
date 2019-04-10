@@ -69,12 +69,12 @@ public class SchoolRunner {
         else
             System.out.println("Passed 4b");
 
-        if (comp_sci.enroll(alan, intro, false))
+        if (alan.addCourse(intro))
             System.out.println("Passed 5");
         else
             System.out.println("Failed 5");
 
-        if (comp_sci.enroll(aashir, intro,false))
+        if (aashir.addCourse(intro))
             System.out.println("Passed 5a");
         else
             System.out.println("Failed 5a");
