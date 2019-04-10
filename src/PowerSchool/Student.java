@@ -26,8 +26,8 @@ public class Student implements Comparable<Student>{
 
     public double getGPA(){
         Student student = new Student(name, gradYear, Academy);
-        double GPA = 0;
-        int numberOfCourses = 0;
+        double GPA = 0.0;
+        double numberOfCourses = 0.0;
 
         for (int i = 0; i < schedule.length; i++){
             if (schedule[i] == null) {

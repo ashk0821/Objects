@@ -141,6 +141,8 @@ public class SchoolRunner {
         ap.setGrade(alan, 890);
         advanced.setGrade(alan, 860);
 
+        System.out.println(alan.getGPA());
+
         if ((int) alan.getGPA() == 916)
             System.out.println("Passed 14");
         else
@@ -165,6 +167,6 @@ public class SchoolRunner {
 
 
 
-        // kidWithClassRank; topStudent
+        // getGPA(), compareTo(), gradeValue(), kidWithClassRank(), topStudent(), setGrade()
     }
 }

@@ -115,16 +115,6 @@ public class School {
      */
     public boolean createClass(String Teacher, String title, boolean honors) {
         Course c1 = new Course(Teacher, title, honors);
-        /*for (int i = 0; i < schoolCourses.length; i++) {
-            if (schoolCourses[i].equals(c1)) {
-                return false;
-            }
-            if (schoolCourses[i] == null) {
-                schoolCourses[i] = c1;
-                break;
-            }
-        }
-        return true;*/
 
         for (int i=0; i<getCourses().length; i++) {
             if (getCourses()[i].teacher.equals(c1.teacher)&&getCourses()[i].courseTitle.equals(c1.courseTitle))
@@ -157,30 +147,6 @@ public class School {
      * Returns false if: Course not in school, or Student not in Course.
      */
     public boolean unenroll(Student kid, Course someCourse) {
-       /* for (int i = 0; i < schoolCourses.length; i++) {
-            if (schoolCourses[i] == null)
-                return false;
-
-            if (schoolCourses[i].equals(someCourse)) {
-                for (int j = 0; i < schoolCourses[i].enrolledStudents.length; j++) {
-                    if (schoolCourses[i].enrolledStudents[j] == null) {
-                        return false;
-                    }
-
-                    if (schoolCourses[i].enrolledStudents[j].equals(kid)) {
-                        schoolCourses[i].enrolledStudents[j] = null;
-                        Arrays.sort(schoolCourses[i].enrolledStudents);
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-
-        }
-        return false;*/
-
         for (int i = 0; i < schoolCourses.length; i++) {
             if (schoolCourses[i] == null)
                 return false;
