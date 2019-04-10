@@ -6,6 +6,13 @@ public class Coach implements SportsProfessional{
     public Team team;
     public String name;
 
+    public Coach(int coachRating, int morale, Team team, String name) {
+        this.coachRating = coachRating;
+        this.morale = morale;
+        this.team = team;
+        this.name = name;
+    }
+
     public void Train (Player player) {
         if (player.team == team) {
             if (coachRating <= 65) {
