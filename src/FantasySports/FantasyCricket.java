@@ -236,6 +236,5 @@ public class FantasyCricket {
         chelsea.playGame(liverpool);
 
 
-
     }
 }

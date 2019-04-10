@@ -57,6 +57,14 @@ public class Student implements Comparable<Student>{
      * Returns false if: course would brings classes to more than
      * 10, or student is already enrolled. */
     public boolean addCourse(Course someCourse) {
+        for (int i=0; i<Academy.schoolCourses.length; i++) {
+            if (Academy.schoolCourses[i] == null)
+                return false;
+
+            if (Academy.schoolCourses[i].teacher.equals(someCourse.teacher) && Academy.getCourses()[i].courseTitle.equals(someCourse.courseTitle))
+                break;
+        }
+
         if (someCourse.enrolledStudents[someCourse.enrolledStudents.length - 1] != null)
             return false;
 

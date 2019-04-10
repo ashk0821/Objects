@@ -25,11 +25,8 @@ public class Course {
     }
 
     public Grade gradeOf(Student someStudent){
-        for(int i = 0; i < enrolledStudents.length; i++){
-            if (enrolledStudents[i] == null)
-                return null;
-
-            if(enrolledStudents[i].equals(someStudent)){
+        for(int i = 0; i < enrolledStudents().length; i++){
+            if(enrolledStudents()[i].equals(someStudent)){
                 return grades[i];
             }
         }
@@ -37,14 +34,21 @@ public class Course {
     }
 
     public int numberEnrolled(){
-        return enrolledStudents.length;
+        return enrolledStudents().length;
     }
 
     public Student[] enrolledStudents(){
-        Student[] ret = new Student[enrolledStudents.length];
+        int length = 0;
 
-        for(int i = 0; i < ret.length; i++){
-            ret[i] = new Student(enrolledStudents[i].name, enrolledStudents[i].gradYear, enrolledStudents[i].Academy);
+        for (int i=0; i<enrolledStudents.length; i++) {
+            if (enrolledStudents[i] != null)
+                length++;
+        }
+
+        Student[] ret = new Student[length];
+
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = enrolledStudents[i];
         }
 
         return ret;
@@ -61,12 +65,12 @@ public class Course {
             }
         }
 
-        return enrolledStudents[highestGradeIndex];
+        return enrolledStudents()[highestGradeIndex];
     }
 
     public void setGrade(Student someStudent, int grade){
-        for(int i = 0; i < enrolledStudents.length; i++){
-            if(someStudent.equals(enrolledStudents[i])){
+        for(int i = 0; i < enrolledStudents().length; i++){
+            if(someStudent.equals(enrolledStudents()[i])){
                 grades[i].grade = grade;
             }
         }

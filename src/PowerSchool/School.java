@@ -146,27 +146,6 @@ public class School {
      * Student would have more than 10 Courses.
      */
     public boolean enroll(Student kid, Course someCourse, boolean audited) {
-        /*for (int check=0; check<kid.schedule.length; check++) {
-            if (kid.schedule[check] == null)
-                break;
-            if (kid.schedule[check] == kid.schedule[kid.schedule.length-1])
-                return false;
-        }
-
-        for (int i = 0; i < schoolCourses.length; i++) {
-            if (schoolCourses[i] == null)
-                break;
-            if (schoolCourses[i].equals(someCourse)) {
-                if (schoolCourses[i].numberEnrolled() < 20) {
-                    schoolCourses[i].enroll(kid, audited);
-                    return true;
-                }
-            }
-            if (schoolCourses[i] == null)
-                break;
-        }
-        return false;*/
-
         for (int i=0; i<getCourses().length; i++) {
             if (getCourses()[i].equals(someCourse))
                 break;
@@ -178,7 +157,7 @@ public class School {
      * Returns false if: Course not in school, or Student not in Course.
      */
     public boolean unenroll(Student kid, Course someCourse) {
-        for (int i = 0; i < schoolCourses.length; i++) {
+       /* for (int i = 0; i < schoolCourses.length; i++) {
             if (schoolCourses[i] == null)
                 return false;
 
@@ -200,6 +179,15 @@ public class School {
 
 
         }
-        return false;
+        return false;*/
+
+        for (int i = 0; i < schoolCourses.length; i++) {
+            if (schoolCourses[i] == null)
+                return false;
+            if (schoolCourses[i] == someCourse)
+                break;
+        }
+
+        return kid.dropCourse(someCourse);
     }
 }

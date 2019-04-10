@@ -72,12 +72,12 @@ public class SchoolRunner {
         else
             System.out.println("Passed 4b");
 
-        if (alan.addCourse(intro))
+        if (comp_sci.enroll(alan, intro, true))
             System.out.println("Passed 5");
         else
             System.out.println("Failed 5");
 
-        if (aashir.addCourse(intro))
+        if (comp_sci.enroll(aashir, intro, true))
             System.out.println("Passed 5a");
         else
             System.out.println("Failed 5a");
@@ -86,12 +86,12 @@ public class SchoolRunner {
         intro.enroll(aashir, false);
         intro.enroll(chris, false);
 
-        if (alan.addCourse(scratch))
+        if (comp_sci.enroll(alan, scratch, false))
             System.out.println("Failed 6");
         else
             System.out.println("Passed 6");
 
-        if (alan.dropCourse(intro))
+        if (comp_sci.unenroll(alan, intro))
             System.out.println("Passed 7");
         else
             System.out.println("Failed 7");
@@ -141,6 +141,30 @@ public class SchoolRunner {
         ap.setGrade(alan, 890);
         advanced.setGrade(alan, 860);
 
-        System.out.println(alan.getGPA());
+        if ((int) alan.getGPA() == 916)
+            System.out.println("Passed 14");
+        else
+            System.out.println("Failed 14");
+
+        ansh.addCourse(cData);
+        ansh.addCourse(ap);
+        ansh.addCourse(advanced);
+
+        cData.setGrade(ansh, 1000);
+        ap.setGrade(ansh, 690);
+        advanced.setGrade(ansh, 760);
+
+        chris.addCourse(ap);
+        ap.setGrade(chris, 780);
+
+        if (ap.numberEnrolled() == 3)
+            System.out.println("Passed 15");
+        else
+            System.out.println("Failed 15");
+
+
+
+
+        // kidWithClassRank; topStudent
     }
 }
