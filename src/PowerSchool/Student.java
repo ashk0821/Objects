@@ -98,7 +98,7 @@ public class Student implements Comparable<Student>{
         for (int i=0; i<schedule.length; i++) {
             if (schedule[i] == null)
                 return false;
-            if (schedule[i] == someCourse)
+            if (schedule[i].teacher.equals(someCourse.teacher) && schedule[i].courseTitle.equals(someCourse.courseTitle))
                 break;
         }
 

@@ -184,7 +184,7 @@ public class School {
         for (int i = 0; i < schoolCourses.length; i++) {
             if (schoolCourses[i] == null)
                 return false;
-            if (schoolCourses[i] == someCourse)
+            if (schoolCourses[i].courseTitle.equals(someCourse.courseTitle) && schoolCourses[i].teacher.equals(someCourse.teacher))
                 break;
         }
 

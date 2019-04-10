@@ -83,7 +83,7 @@ public class Course {
     }
 
     public void unenroll (Student someStudent) {
-        for (int i=0; i<enrolledStudents.length; i++) {
+        for (int i=0; i<enrolledStudents().length; i++) {
             if (enrolledStudents[i].equals(someStudent)) {
                 enrolledStudents[i] = null;
                 Arrays.sort(enrolledStudents);
