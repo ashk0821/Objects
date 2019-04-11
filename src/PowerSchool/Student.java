@@ -4,12 +4,13 @@ public class Student implements Comparable<Student>{
     String name;
     int gradYear;
     School Academy;
-    Course[] schedule = new Course[10];
+    Course[] schedule;
 
     public Student(String name, int gradYear, School Academy){
         this.name = name;
         this.gradYear = gradYear;
         this.Academy = Academy;
+        this.schedule = new Course[10];
     }
 
     public String getName(){
@@ -24,20 +25,22 @@ public class Student implements Comparable<Student>{
         return Academy;
     }
 
-    public double getGPA(){
-        Student student = new Student(name, gradYear, Academy);
-        double GPA = 0.0;
-        double numberOfCourses = 0.0;
+    public int getGPA(){
+        int GPA = 0;
+        int numberOfCourses = 0;
 
         for (int i = 0; i < schedule.length; i++){
             if (schedule[i] == null) {
                 numberOfCourses = i;
                 break;
             }
-            if (schedule[i].gradeOf(student).gradeValue() > -1)
-                GPA += schedule[i].gradeOf(student).gradeValue();
+            if (schedule[i].gradeOf(this).gradeValue() > -1)
+                GPA += schedule[i].gradeOf(this).gradeValue();
+
         }
 
+        if (numberOfCourses == 0)
+            return 0;
         return GPA / numberOfCourses;
     }
 

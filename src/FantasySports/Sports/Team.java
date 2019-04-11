@@ -5,32 +5,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Team implements SportsProfessional{
-    public int team_morale;
     int teamRating;
-    int number_of_players;
+    public int number_of_players;
     public int teamFinalRating;
     public java.lang.String team_name;
     public Coach coach;
-    int teamBonusPoints = 0; // since team rating is just an average, this is just an account of W/L
     ArrayList<Player> players = new ArrayList<>();
+    boolean did_i_win;
+    int record = 0;
 
-    public void changeRating (boolean gameResult) {
-        if (gameResult)
-            teamBonusPoints ++;
-        else
-            teamBonusPoints --;
-    }
-
-    public int changeMorale (boolean gameResult) {
-        Team result = new Team();
-        result.gamePlayed(gameResult);
-
-        if (gameResult)
-            team_morale ++;
-        else {
-            team_morale --;
-        }
-        return team_morale;
+    public Team(int number_of_players, int teamFinalRating, java.lang.String team_name, Coach coach) {
+        this.number_of_players = number_of_players;
+        this.teamFinalRating = teamFinalRating;
+        this.team_name = team_name;
+        this.coach = coach;
     }
 
     public int getRating() {
@@ -46,42 +34,56 @@ public class Team implements SportsProfessional{
         }
         if (number_of_players == 0)
             throw new ArithmeticException("/ by 0");
-        return teamRating / number_of_players + teamBonusPoints;
+        return (teamRating / number_of_players);
     }
 
     public Team playGame (Team opponent) {
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
-        Team team = new Team();
-        int myRating = team.getFinalRating();
-        opponent = new Team();
-        int yourRating = opponent.getFinalRating();
+        int myRating = this.teamFinalRating;
+        opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
+        int yourRating = opponent.teamFinalRating;
 
         int ratingDifference = Math.abs(myRating-yourRating);
-        System.out.println(ratingDifference);
         int results = rand.nextInt(ratingDifference);
 
         if (results >= 3) {
-            if (myRating > yourRating)
-                return team;
+            if (myRating > yourRating) {
+                record+=3;
+                did_i_win = true;
+                return this;
+            }
+            did_i_win = false;
+            record++;
             return opponent;
         }
 
-        int chance = rand.nextInt(1);
-        if (chance == 0)
-            return team;
+        else if (results <= 3) {
+            int chance = rand.nextInt(2);
+            if (chance == 0) {
+                did_i_win = true;
+                record+=3;
+                return this;
+            }
+        }
+        did_i_win = false;
+        record++;
         return opponent;
     }
 
-    private void gamePlayed (boolean did_i_win) { // calls on playGame
-        Team opponent = new Team();
-        if (playGame(opponent) == opponent)
-            did_i_win =  false;
-        else
-            did_i_win = true;
-
-        changeRating(did_i_win);
+    public Team winnerWas (Team opponent) {
+        opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
+        if (!did_i_win) {
+            return opponent;
+        }
+        return this;
     }
+
+    public Team loserWas (Team opponent) {
+        if (this.winnerWas(opponent).equals(this))
+            return opponent;
+        return this;
+}
 
     public void draft (Player player) {
         players.add(player);
@@ -96,5 +98,9 @@ public class Team implements SportsProfessional{
             roster += players.get(i).name + ", ";
 
         return roster;
+    }
+
+    public int getTotal() {
+        return record;
     }
 }

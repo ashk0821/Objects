@@ -6,9 +6,8 @@ public class Coach implements SportsProfessional{
     public Team team;
     public String name;
 
-    public Coach(int coachRating, int morale, Team team, String name) {
+    public Coach(int coachRating, Team team, String name) {
         this.coachRating = coachRating;
-        this.morale = morale;
         this.team = team;
         this.name = name;
     }
@@ -57,21 +56,6 @@ public class Coach implements SportsProfessional{
             player.stamina = 99;
     }
 
-    public void changeRating (boolean gameResult) {
-        if (gameResult)
-            coachRating ++;
-        else
-            coachRating --;
-    }
-
-    public int changeMorale (boolean gameResult) {
-        if (gameResult)
-            morale += 2;
-        else
-            morale --;
-
-        return morale;
-    }
 
     public int getRating() {
         return coachRating;
