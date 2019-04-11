@@ -8,9 +8,9 @@ public interface Gambler {
     //public Team chosen;
     //public Team winner;
 
-    public void bet (Team a, Team b);
+    public Team bet (Team a, Team b);
 
-    public void winnerWas ();
+    public Team winnerWas (Team a, Team b);
 
     public double finalBalance();
 

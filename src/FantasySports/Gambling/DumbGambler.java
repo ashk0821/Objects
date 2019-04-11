@@ -5,46 +5,42 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DumbGambler implements Gambler {
-    public Team chosen;
-    public Team winner;
-    public Team loser;
-    public int currentBalance=1000;
+    public Team a;
+    public Team b;
+    public Team other;
+    public double currentBalance=1000;
+    ArrayList<Double> history = new ArrayList<>();
 
-    public void bet (Team a, Team b) {
-        Random team = new Random();
-        int random_team = team.nextInt(1);
+    public Team bet (Team a, Team b) {
+        this.a = a;
+        this.b = b;
 
-        if (random_team == 0)
-            chosen = a;
-        else
-            chosen = b;
-    }
-
-    public void winnerWas () {
-        Team picked = chosen;
-        Team enemy = new Team(0,0, "", null);
-        if (picked.winnerWas(enemy) == picked) {
-            winner = chosen;
-            loser = enemy;
+        if (a.getRating() >= b.getRating()) {
+            other = this.a;
+            return this.b;
         }
         else {
-            winner = enemy;
-            loser = chosen;
+            other = this.b;
+            return this.a;
         }
+    }
+
+    public Team winnerWas (Team a, Team b) {
+        return this.a.winnerWas(this.b);
     }
 
     public double finalBalance() {
         if (currentBalance == 0)
             return 0;
 
-        if (winner == chosen) {
-            if (winner.getRating() >= loser.getRating())
+        if (bet(a, b).equals(winnerWas(a, b))) {
+            if (bet(a, b).getFinalRating() >= b.getFinalRating())
                 currentBalance += 100;
             else
                 currentBalance += 200;
         }
         else {
-            if (winner.getRating() >= loser.getRating())
+            if (other.getFinalRating() >= bet(a, b).getFinalRating())
                 currentBalance -= 100;
             else
                 currentBalance -= 200;
@@ -57,8 +53,7 @@ public class DumbGambler implements Gambler {
     }
 
     public ArrayList<Double> gamblingHistory() {
-        ArrayList<Double> history = new ArrayList<>();
-        history.add(finalBalance());
+        history.add(currentBalance);
         return history;
     }
 }
