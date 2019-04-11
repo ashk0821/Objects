@@ -34,15 +34,14 @@ public class x extends JPanel implements Runnable {
 
 
     Color[] color;          // colors associated with the preceding 5 constants;
-    int rows = 31;          // number of rows of cells in maze, including a wall around edges
-    int columns = 41;       // number of columns of cells in maze, including a wall around edges
+    int rows = 51;          // number of rows of cells in maze, including a wall around edges
+    int columns = 51;       // number of columns of cells in maze, including a wall around edges
     int border = 0;         // minimum number of pixels between maze and edge of panel
-    int sleepTime = 5000;   // wait time after solving one maze before making another
-    int speedSleep = 30;    // short delay between steps in making and solving maze
-    int blockSize = 12;     // size of each cell
+    int sleepTime = 2000;   // wait time after solving one maze before making another
+    int speedSleep = 50;    // short delay between steps in making and solving maze
+    int blockSize = 15;     // size of each cell
 
-    int width = -1;   // width of panel, to be set by checkSize()
-    int height = -1;  // height of panel, to be set by checkSize()
+    int width, height;  // height of panel, to be set by checkSize()
 
     int totalWidth;   // width of panel, minus border area (set in checkSize())
     int totalHeight;  // height of panel, minus border area (set in checkSize())
