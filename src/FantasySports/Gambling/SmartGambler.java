@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SmartGambler implements Gambler {
+    public Team other;
     public Team chosen;
     public Team winner;
     public Team loser;
     public int currentBalance=1000;
 
     public void bet (Team a, Team b) {
-        if (a.getRating() >= b.getRating())
+        if (a.getRating() >= b.getRating()) {
             chosen = a;
-        else
+            other = b;
+        }
+        else {
             chosen = b;
+            other = a;
+        }
     }
 
     public void winnerWas () {
@@ -34,7 +39,7 @@ public class SmartGambler implements Gambler {
         if (currentBalance == 0)
             return 0;
 
-        if (winner == chosen) {
+        if (chosen.winnerWas(other) == chosen) {
             if (winner.getRating() >= loser.getRating())
                 currentBalance += 100;
             else
