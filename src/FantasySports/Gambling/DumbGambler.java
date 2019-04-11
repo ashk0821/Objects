@@ -23,7 +23,7 @@ public class DumbGambler implements Gambler {
     public void winnerWas () {
         Team picked = chosen;
         Team enemy = new Team(0,0, "", null);
-        if (picked.playGame(enemy) == picked) {
+        if (picked.winnerWas(enemy) == picked) {
             winner = chosen;
             loser = enemy;
         }

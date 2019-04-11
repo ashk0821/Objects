@@ -142,11 +142,48 @@ public class FantasyCricket {
         dumb_gambler.bet(chelsea, liverpool);
         ambitious_gambler.bet(chelsea, liverpool);
 
-        System.out.println(barca.playGame(chelsea).team_name);
-        System.out.println(chelsea.playGame(liverpool).team_name);
-        System.out.println(real_madrid.playGame(chelsea).team_name);
-        System.out.println(chelsea.getTotal());
+        chelsea.playGame(barca);
+        chelsea.winnerWas(barca);
+        chelsea.playGame(liverpool);
+        chelsea.winnerWas(liverpool);
+        chelsea.playGame(real_madrid);
+        chelsea.winnerWas(real_madrid);
+        System.out.println("Chelsea's total is " + chelsea.getTotal());
 
-        System.out.println(smart_gambler.currentBalance);
+        liverpool.playGame(chelsea);
+        liverpool.winnerWas(chelsea);
+        liverpool.playGame(real_madrid);
+        liverpool.winnerWas(real_madrid);
+        liverpool.playGame(barca);
+        liverpool.winnerWas(barca);
+        System.out.println("Liverpool's total is " + liverpool.getTotal());
+
+        real_madrid.playGame(chelsea);
+        real_madrid.winnerWas(chelsea);
+        real_madrid.playGame(liverpool);
+        real_madrid.winnerWas(liverpool);
+        real_madrid.playGame(barca);
+        real_madrid.winnerWas(barca);
+        System.out.println("Real Madrid's total is " + real_madrid.getTotal());
+
+        barca.playGame(chelsea);
+        barca.winnerWas(chelsea);
+        barca.playGame(liverpool);
+        barca.winnerWas(liverpool);
+        barca.playGame(real_madrid);
+        barca.winnerWas(real_madrid);
+        System.out.println("Barcelona's total is " + barca.getTotal());
+
+
+        if (chelsea.getTotal() > real_madrid.getTotal() && chelsea.getTotal() > liverpool.getTotal() && chelsea.getTotal() > barca.getTotal())
+            System.out.println("Chelsea won!");
+        else if (liverpool.getTotal() > barca.getTotal() && liverpool.getTotal() > real_madrid.getTotal())
+            System.out.println("Liverpool won!");
+        else if (real_madrid.getTotal() > barca.getTotal())
+            System.out.println("Real Madrid won!");
+        else
+            System.out.println("Barcelona won!");
+
+        // lowest rating wins.
     }
 }

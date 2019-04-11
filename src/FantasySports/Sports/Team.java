@@ -40,8 +40,8 @@ public class Team implements SportsProfessional{
     public Team playGame (Team opponent) {
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
-        Team team = new Team(number_of_players, teamFinalRating, team_name, coach);
-        int myRating = team.teamFinalRating;
+        //Team team = new Team(number_of_players, teamFinalRating, team_name, coach);
+        int myRating = this.teamFinalRating;
         opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
         int yourRating = opponent.teamFinalRating;
 
@@ -51,7 +51,7 @@ public class Team implements SportsProfessional{
         if (results >= 3) {
             if (myRating > yourRating) {
                 did_i_win = true;
-                return team;
+                return this;
             }
             did_i_win = false;
             return opponent;
@@ -61,7 +61,7 @@ public class Team implements SportsProfessional{
             int chance = rand.nextInt(2);
             if (chance == 0) {
                 did_i_win = true;
-                return team;
+                return this;
             }
         }
         did_i_win = false;
@@ -79,38 +79,38 @@ public class Team implements SportsProfessional{
     }*/
 
     public Team winnerWas (Team opponent) {
-        Team team = new Team(number_of_players, teamFinalRating, team_name, coach);
+        //Team team = new Team(number_of_players, teamFinalRating, team_name, coach);
         opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
         if (!did_i_win) {
             for (int i=0; i<record.length; i++) {
-                if (record[i] == 0) {
+                if (this.record[i] == 0) {
                     record[i] = 1;
                     break;
                 }
             }
 
             for (int i=0; i<opponent.record.length; i++) {
-                if (record[i] == 0) {
-                    record[i] = 3;
+                if (opponent.record[i] == 0) {
+                    opponent.record[i] = 3;
                     break;
                 }
             }
             return opponent;
         }
         for (int i=0; i<record.length; i++) {
-            if (record[i] == 0) {
-                record[i] = 3;
+            if (this.record[i] == 0) {
+                this.record[i] = 3;
                 break;
             }
         }
 
         for (int i=0; i<opponent.record.length; i++) {
-            if (record[i] == 0) {
-                record[i] = 1;
+            if (opponent.record[i] == 0) {
+                opponent.record[i] = 1;
                 break;
             }
         }
-        return team;
+        return this;
     }
 
     public void draft (Player player) {
