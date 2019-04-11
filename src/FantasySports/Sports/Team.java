@@ -12,7 +12,7 @@ public class Team implements SportsProfessional{
     public Coach coach;
     ArrayList<Player> players = new ArrayList<>();
     boolean did_i_win;
-    public int[] record = new int[3];
+    int record = 0;
 
     public Team(int number_of_players, int teamFinalRating, java.lang.String team_name, Coach coach) {
         this.number_of_players = number_of_players;
@@ -49,10 +49,12 @@ public class Team implements SportsProfessional{
 
         if (results >= 3) {
             if (myRating > yourRating) {
+                record+=3;
                 did_i_win = true;
                 return this;
             }
             did_i_win = false;
+            record++;
             return opponent;
         }
 
@@ -60,30 +62,19 @@ public class Team implements SportsProfessional{
             int chance = rand.nextInt(2);
             if (chance == 0) {
                 did_i_win = true;
+                record+=3;
                 return this;
             }
         }
         did_i_win = false;
+        record++;
         return opponent;
     }
 
     public Team winnerWas (Team opponent) {
         opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
         if (!did_i_win) {
-            for (int i=0; i<record.length; i++) {
-                if (this.record[i] == 0) {
-                    record[i] = 1;
-                    break;
-                }
-            }
             return opponent;
-        }
-
-        for (int i=0; i<record.length; i++) {
-            if (this.record[i] == 0) {
-                this.record[i] = 3;
-                break;
-            }
         }
         return this;
     }
@@ -110,11 +101,6 @@ public class Team implements SportsProfessional{
     }
 
     public int getTotal() {
-        int total = 0;
-
-        for (int i=0; i<record.length; i++) {
-            total += record[i];
-        }
-        return total;
+        return record;
     }
 }

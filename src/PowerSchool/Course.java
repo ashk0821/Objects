@@ -6,14 +6,16 @@ public class Course {
 
     String courseTitle;
     String teacher;
-    Student[] enrolledStudents = new Student[20];
-    Grade[] grades = new Grade[20];
+    Student[] enrolledStudents;
+    Grade[] grades;
     boolean honors;
 
     public Course(String teacher, String title, boolean honors){
         this.teacher = teacher;
         this.courseTitle = title;
         this.honors = honors;
+        this.enrolledStudents = new Student[20];
+        this.grades = new Grade[20];
     }
 
     public String courseTitle(){
@@ -25,19 +27,21 @@ public class Course {
     }
 
     public Grade gradeOf(Student someStudent){
-        for(int i = 0; i < enrolledStudents().length; i++){
-            if(enrolledStudents()[i].equals(someStudent)){
+        for(int i = 0; i < enrolledStudents.length; i++){
+            if (enrolledStudents[i] == null)
+                break;
+            if(enrolledStudents[i].equals(someStudent)){
                 return grades[i];
             }
         }
-        return grades[0];
+        return null;
     }
 
     public int numberEnrolled(){
-        return enrolledStudents().length;
+        return enrolledStudents.length;
     }
 
-    public Student[] enrolledStudents(){
+    /*public Student[] enrolledStudents(){
         int length = 0;
 
         for (int i=0; i<enrolledStudents.length; i++) {
@@ -52,7 +56,7 @@ public class Course {
         }
 
         return ret;
-    }
+    }*/
 
     public Student topStudent(){
         int highestGradeIndex = 0;
@@ -65,12 +69,12 @@ public class Course {
             }
         }
 
-        return enrolledStudents()[highestGradeIndex];
+        return enrolledStudents[highestGradeIndex];
     }
 
     public void setGrade(Student someStudent, int grade){
-        for(int i = 0; i < enrolledStudents().length; i++){
-            if(someStudent.equals(enrolledStudents()[i])){
+        for(int i = 0; i < enrolledStudents.length; i++){
+            if(someStudent.equals(enrolledStudents[i])){
                 grades[i].grade = grade;
             }
         }
@@ -83,7 +87,9 @@ public class Course {
     }
 
     public void unenroll (Student someStudent) {
-        for (int i=0; i<enrolledStudents().length; i++) {
+        for (int i=0; i<enrolledStudents.length; i++) {
+            if (enrolledStudents[i] == null)
+                break;
             if (enrolledStudents[i].equals(someStudent)) {
                 enrolledStudents[i] = null;
                 Arrays.sort(enrolledStudents);

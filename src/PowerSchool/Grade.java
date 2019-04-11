@@ -7,17 +7,18 @@ public class Grade {
     Course course;
 
     public Grade(boolean honors, boolean audited, int grade, Course course){
-        if(grade > 1000){
-            grade = 1000;
-        }
-        if(grade < 0){
-            grade = 0;
-        }
-
-        this.grade = grade;
         this.honors = honors;
         this.audited = audited;
         this.course = course;
+
+        if(this.grade > 1000){
+            this.grade = 1000;
+        }
+        else if(this.grade < 0){
+            this.grade = 0;
+        }
+        else
+            this.grade = grade;
 
 
     }
