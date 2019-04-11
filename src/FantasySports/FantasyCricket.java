@@ -154,6 +154,7 @@ public class FantasyCricket {
         System.out.println("Smart History: " + smart_gambler.gamblingHistory());
         System.out.println("Dumb History: " + dumb_gambler.gamblingHistory());
         System.out.println("Ambitious History: " + ambitious_gambler.gamblingHistory());
+        System.out.println(chelsea.getTotal());
 
         smart_gambler.bet(chelsea, liverpool);
         dumb_gambler.bet(chelsea, liverpool);
@@ -166,6 +167,7 @@ public class FantasyCricket {
         System.out.println("Smart History: " + smart_gambler.gamblingHistory());
         System.out.println("Dumb History: " + dumb_gambler.gamblingHistory());
         System.out.println("Ambitious History: " + ambitious_gambler.gamblingHistory());
+        System.out.println(chelsea.getTotal());
 
 
         smart_gambler.bet(chelsea, real_madrid);
@@ -179,6 +181,7 @@ public class FantasyCricket {
         System.out.println("Smart History: " + smart_gambler.gamblingHistory());
         System.out.println("Dumb History: " + dumb_gambler.gamblingHistory());
         System.out.println("Ambitious History: " + ambitious_gambler.gamblingHistory());
+        System.out.println(chelsea.getTotal());
 
         smart_gambler.bet(liverpool, chelsea);
         dumb_gambler.bet(liverpool, chelsea);

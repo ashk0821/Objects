@@ -14,6 +14,8 @@ public class AmbitiousGambler implements Gambler {
 
 
     public Team bet (Team a, Team b) {
+        if (currentBalance == 0)
+            return null;
         this.a = a;
         this.b = b;
         if (a.getRating() + 5 >= b.getRating() && a.getRating() < b.getRating()) {
@@ -42,6 +44,8 @@ public class AmbitiousGambler implements Gambler {
     }
 
     public double finalBalance() {
+        if (bet(a, b) == null)
+            return 0;
         if (currentBalance == 0)
             return 0;
 
