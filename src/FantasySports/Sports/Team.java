@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Team implements SportsProfessional{
-    public int team_morale;
     int teamRating;
     int number_of_players;
     public int teamFinalRating;
@@ -13,24 +12,13 @@ public class Team implements SportsProfessional{
     public Coach coach;
     ArrayList<Player> players = new ArrayList<>();
     boolean did_i_win;
+    public int[] record = new int[3];
 
-    public Team(int team_morale, int number_of_players, int teamFinalRating, java.lang.String team_name, Coach coach) {
-        this.team_morale = team_morale;
+    public Team(int number_of_players, int teamFinalRating, java.lang.String team_name, Coach coach) {
         this.number_of_players = number_of_players;
         this.teamFinalRating = teamFinalRating;
         this.team_name = team_name;
         this.coach = coach;
-    }
-
-    public void changeRating (boolean gameResult) {
-        if (gameResult)
-            team_morale ++;
-        else
-            team_morale --;
-    }
-
-    public int changeMorale (boolean gameResult) {
-        return team_morale;
     }
 
     public int getRating() {
@@ -46,15 +34,15 @@ public class Team implements SportsProfessional{
         }
         if (number_of_players == 0)
             throw new ArithmeticException("/ by 0");
-        return (teamRating / number_of_players) + team_morale;
+        return (teamRating / number_of_players);
     }
 
     public Team playGame (Team opponent) {
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
-        Team team = new Team(team_morale, number_of_players, teamFinalRating, team_name, coach);
+        Team team = new Team(number_of_players, teamFinalRating, team_name, coach);
         int myRating = team.teamFinalRating;
-        opponent = new Team(opponent.team_morale, opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
+        opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
         int yourRating = opponent.teamFinalRating;
 
         int ratingDifference = Math.abs(myRating-yourRating);
@@ -63,13 +51,9 @@ public class Team implements SportsProfessional{
         if (results >= 3) {
             if (myRating > yourRating) {
                 did_i_win = true;
-                team_morale++;
-                opponent.team_morale--;
                 return team;
             }
             did_i_win = false;
-            opponent.team_morale++;
-            team_morale--;
             return opponent;
         }
 
@@ -77,14 +61,10 @@ public class Team implements SportsProfessional{
             int chance = rand.nextInt(2);
             if (chance == 0) {
                 did_i_win = true;
-                team_morale++;
-                opponent.team_morale--;
                 return team;
             }
         }
         did_i_win = false;
-        team_morale--;
-        opponent.team_morale++;
         return opponent;
     }
 
@@ -99,13 +79,37 @@ public class Team implements SportsProfessional{
     }*/
 
     public Team winnerWas (Team opponent) {
-        Team team = new Team(team_morale, number_of_players, teamFinalRating, team_name, coach);
-        opponent = new Team(opponent.team_morale, opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
+        Team team = new Team(number_of_players, teamFinalRating, team_name, coach);
+        opponent = new Team(opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
         if (!did_i_win) {
-            team_morale --;
+            for (int i=0; i<record.length; i++) {
+                if (record[i] == 0) {
+                    record[i] = 1;
+                    break;
+                }
+            }
+
+            for (int i=0; i<opponent.record.length; i++) {
+                if (record[i] == 0) {
+                    record[i] = 3;
+                    break;
+                }
+            }
             return opponent;
         }
-        team_morale ++;
+        for (int i=0; i<record.length; i++) {
+            if (record[i] == 0) {
+                record[i] = 3;
+                break;
+            }
+        }
+
+        for (int i=0; i<opponent.record.length; i++) {
+            if (record[i] == 0) {
+                record[i] = 1;
+                break;
+            }
+        }
         return team;
     }
 
@@ -122,5 +126,14 @@ public class Team implements SportsProfessional{
             roster += players.get(i).name + ", ";
 
         return roster;
+    }
+
+    public int getTotal() {
+        int total = 0;
+
+        for (int i=0; i<record.length; i++) {
+            total += record[i];
+        }
+        return total;
     }
 }

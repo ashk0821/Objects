@@ -9,57 +9,21 @@ public class Player implements SportsProfessional{
     public int catching;
     public int stamina;
     public int power;
-    public int morale;
     public java.lang.String name;
     public Team team;
 
-    public Player(int speed, int catching, int stamina, int power, int morale, java.lang.String name, Team team) {
+    public Player(int speed, int catching, int stamina, int power, java.lang.String name, Team team) {
         this.speed = speed;
         this.catching = catching;
         this.stamina = stamina;
         this.power = power;
-        this.morale = morale;
         this.name = name;
         this.team = team;
     }
 
-    public void changeRating (boolean gameResult) {
-        Random stat_to_change = new Random();
-        int stat = stat_to_change.nextInt(3);
-        if (gameResult) {
-            if (stat == 0)
-                speed += 3;
-            else if (stat == 1)
-                catching += 3;
-            else if (stat == 2)
-                stamina += 3;
-            else
-                power += 3;
-        }
-
-        else {
-        if (stat == 0)
-            speed -= 2;
-        else if (stat == 1)
-            catching -= 2;
-        else if (stat == 2)
-            stamina -= 2;
-        else
-            power -= 2;
-        }
-    }
 
     public int getRating () {
         return (speed + catching + stamina + power) / 4;
-    }
-
-    public int changeMorale (boolean gameResult) {
-        if (gameResult)
-            morale += 2;
-        else
-            morale --;
-
-        return morale;
     }
 
     public java.lang.String getName () {

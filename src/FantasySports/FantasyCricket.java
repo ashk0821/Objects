@@ -10,31 +10,31 @@ import FantasySports.Sports.Team;
 
 public class FantasyCricket {
     public static void main(String[] args) {
-        Team chelsea = new Team(0, 0, 0, "Chelsea", null);
-        Team real_madrid = new Team(0, 0, 0, "Real Madrid", null);
-        Team liverpool = new Team(0, 0, 0, "Liverpool", null);
-        Team barca = new Team(0, 0, 0, "Barcelona", null);
+        Team chelsea = new Team(0, 0, "Chelsea", null);
+        Team real_madrid = new Team(0, 0, "Real Madrid", null);
+        Team liverpool = new Team(0, 0,  "Liverpool", null);
+        Team barca = new Team(0, 0,  "Barcelona", null);
 
-        Player alan = new Player(75, 40, 95, 80, 0,"Alan", chelsea);
-        Player eden = new Player(95, 35, 95, 45, 0, "Eden Hazard", chelsea);
-        Player ben = new Player(99, 99, 99, 99, 0, "Mr. Isecke", chelsea);
+        Player alan = new Player(75, 40, 95, 80, "Alan", chelsea);
+        Player eden = new Player(95, 35, 95, 45,  "Eden Hazard", chelsea);
+        Player ben = new Player(99, 99, 99, 99, "Mr. Isecke", chelsea);
 
-        Player aashir = new Player(75, 70, 65, 70, 0, "Aashir", liverpool);
-        Player mo = new Player (95, 25, 85, 35, 0,"Mohammad Salah", liverpool);
-        Player bryan = new Player(99, 99, 99, 99, 0,"Mr. Respass", liverpool);
+        Player aashir = new Player(75, 70, 65, 70, "Aashir", liverpool);
+        Player mo = new Player (95, 25, 85, 35, "Mohammad Salah", liverpool);
+        Player bryan = new Player(99, 99, 99, 99, "Mr. Respass", liverpool);
 
-        Player amani = new Player(95, 30, 75, 10, 0, "Amani", real_madrid);
-        Player ramos = new Player(70, 65, 75, 85, 0,"Sergio Ramos", real_madrid);
-        Player matt = new Player(99, 99, 99, 99, 0, "Mr. Wong", real_madrid);
+        Player amani = new Player(95, 30, 75, 10,  "Amani", real_madrid);
+        Player ramos = new Player(70, 65, 75, 85, "Sergio Ramos", real_madrid);
+        Player matt = new Player(99, 99, 99, 99,  "Mr. Wong", real_madrid);
 
-        Player chris = new Player(55, 85, 35, 80, 0, "Chris", barca);
-        Player leo = new Player(85, 35, 85, 45, 0, "Lionel Messi", barca);
-        Player ansh = new Player(60, 60, 60, 60, 0, "Ansh", barca);
+        Player chris = new Player(55, 85, 35, 80,  "Chris", barca);
+        Player leo = new Player(85, 35, 85, 45,  "Lionel Messi", barca);
+        Player ansh = new Player(60, 60, 60, 60,  "Ansh", barca);
 
-        Coach sarri = new Coach(75, 0, chelsea, "Mauricio Sarri");
-        Coach jurgen = new Coach(85, 0, liverpool, "Jurgen Klopp");
-        Coach zidane = new Coach(99, 0, real_madrid, "Zinedine Zidane");
-        Coach ernesto = new Coach(55, 0, barca, "Ernesto Valverde");
+        Coach sarri = new Coach(75, chelsea, "Mauricio Sarri");
+        Coach jurgen = new Coach(85, liverpool, "Jurgen Klopp");
+        Coach zidane = new Coach(99,  real_madrid, "Zinedine Zidane");
+        Coach ernesto = new Coach(55,  barca, "Ernesto Valverde");
 
         chelsea.coach = sarri;
         liverpool.coach = jurgen;
@@ -142,14 +142,10 @@ public class FantasyCricket {
         dumb_gambler.bet(chelsea, liverpool);
         ambitious_gambler.bet(chelsea, liverpool);
 
-        System.out.println(chelsea.getFinalRating());
-        System.out.println(barca.getFinalRating());
-
         System.out.println(barca.playGame(chelsea).team_name);
-
-        System.out.println(chelsea.team_morale);
-        System.out.println(chelsea.getFinalRating());
-        System.out.println(barca.getFinalRating());
+        System.out.println(chelsea.playGame(liverpool).team_name);
+        System.out.println(real_madrid.playGame(chelsea).team_name);
+        System.out.println(chelsea.getTotal());
 
         System.out.println(smart_gambler.currentBalance);
     }
