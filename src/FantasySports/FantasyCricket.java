@@ -142,10 +142,6 @@ public class FantasyCricket {
         dumb_gambler.bet(chelsea, liverpool);
         ambitious_gambler.bet(chelsea, liverpool);
 
-        System.out.println(chelsea.getFinalRating());
-        chelsea.playGame(liverpool);
-
-
-
+        System.out.println(liverpool.playGame(chelsea).team_name);
     }
 }

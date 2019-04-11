@@ -61,13 +61,13 @@ public class Team implements SportsProfessional{
         Random rand = new Random(); //https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 
         Team team = new Team(team_morale, number_of_players, teamFinalRating, team_name, coach);
-        int myRating = team.getFinalRating();
+        int myRating = team.teamFinalRating;
         opponent = new Team(opponent.team_morale, opponent.number_of_players, opponent.teamFinalRating, opponent.team_name, opponent.coach);
-        int yourRating = opponent.getFinalRating();
+        int yourRating = opponent.teamFinalRating;
 
         int ratingDifference = Math.abs(myRating-yourRating);
-        System.out.println(ratingDifference);
         int results = rand.nextInt(ratingDifference);
+        System.out.println(results);
 
         if (results >= 3) {
             if (myRating > yourRating)
@@ -75,9 +75,12 @@ public class Team implements SportsProfessional{
             return opponent;
         }
 
-        int chance = rand.nextInt(1);
-        if (chance == 0)
-            return team;
+        else if (results <= 3) {
+            int chance = rand.nextInt(2);
+            System.out.println(chance);
+            if (chance == 0)
+                return team;
+        }
         return opponent;
     }
 
