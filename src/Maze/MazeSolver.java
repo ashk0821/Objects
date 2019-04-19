@@ -2,7 +2,6 @@ package Maze;
 
 import javax.swing.*;
 
-
 public class MazeSolver extends JPanel{
 
     /* Boolean function to return if the maze is solved or not. It is considered to be solved if the path of the maze
@@ -25,8 +24,8 @@ public class MazeSolver extends JPanel{
             catch (InterruptedException e) { }
 
             /* If the maze has not been solved, it tries to solve the maze by extending its path */
-            if (solveMaze(row - 1,column)  || solveMaze(row,column-1)  || solveMaze(row+1,column)  ||
-                    solveMaze(row,column+1) ){
+            if (solveMaze(row - 1,column)  || solveMaze(row,column - 1)  || solveMaze(row + 1, column)
+                    || solveMaze(row,column + 1) ){
                 return true;
             }
 

@@ -2,6 +2,15 @@
 import java.awt.*;
 import javax.swing.*;
 
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * Creates a random maze, then solves it by finding a path from the
+ * upper left corner to the lower right corner.  (After doing
+ * one maze, it waits a while then starts over by creating a
+ * new random maze.)
+ */
 public class x extends JPanel implements Runnable {
 
     // a main routine makes it possible to run this class as a program
@@ -34,14 +43,15 @@ public class x extends JPanel implements Runnable {
 
 
     Color[] color;          // colors associated with the preceding 5 constants;
-    int rows = 51;          // number of rows of cells in maze, including a wall around edges
-    int columns = 51;       // number of columns of cells in maze, including a wall around edges
+    int rows = 31;          // number of rows of cells in maze, including a wall around edges
+    int columns = 41;       // number of columns of cells in maze, including a wall around edges
     int border = 0;         // minimum number of pixels between maze and edge of panel
-    int sleepTime = 2000;   // wait time after solving one maze before making another
-    int speedSleep = 50;    // short delay between steps in making and solving maze
-    int blockSize = 15;     // size of each cell
+    int sleepTime = 5000;   // wait time after solving one maze before making another
+    int speedSleep = 30;    // short delay between steps in making and solving maze
+    int blockSize = 12;     // size of each cell
 
-    int width, height;  // height of panel, to be set by checkSize()
+    int width = -1;   // width of panel, to be set by checkSize()
+    int height = -1;  // height of panel, to be set by checkSize()
 
     int totalWidth;   // width of panel, minus border area (set in checkSize())
     int totalHeight;  // height of panel, minus border area (set in checkSize())
@@ -151,7 +161,7 @@ public class x extends JPanel implements Runnable {
                 }
             }
         mazeExists = true;
-
+        repaint();
         int r;
         for (i=wallCt-1; i>0; i--) {
             r = (int)(Math.random() * i);  // choose a wall randomly and maybe tear it down
@@ -165,7 +175,7 @@ public class x extends JPanel implements Runnable {
                     maze[i][j] = emptyCode;
     }
 
-    void tearDown(int row, int col) {
+    synchronized void tearDown(int row, int col) {
         // Tear down a wall, unless doing so will form a loop.  Tearing down a wall
         // joins two "rooms" into one "room".  (Rooms begin to look like corridors
         // as they grow.)  When a wall is torn down, the room codes on one side are
@@ -177,13 +187,17 @@ public class x extends JPanel implements Runnable {
             // row is odd; wall separates rooms horizontally
             fill(row, col-1, maze[row][col-1], maze[row][col+1]);
             maze[row][col] = maze[row][col+1];
-
+            repaint();
+            try { wait(speedSleep); }
+            catch (InterruptedException e) { }
         }
         else if (row % 2 == 0 && maze[row-1][col] != maze[row+1][col]) {
             // row is even; wall separates rooms vertically
             fill(row-1, col, maze[row-1][col], maze[row+1][col]);
             maze[row][col] = maze[row+1][col];
-
+            repaint();
+            try { wait(speedSleep); }
+            catch (InterruptedException e) { }
         }
     }
 

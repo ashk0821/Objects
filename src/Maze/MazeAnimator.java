@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MazeAnimator extends JPanel implements Runnable{
-    private int totalWidth, totalHeight, leftWall, topWall;
+    private int panelWidth, panelHeight, leftWall, topWall;
     MazeSolver solver = new MazeSolver();
 
     public MazeAnimator() {
@@ -18,34 +18,28 @@ public class MazeAnimator extends JPanel implements Runnable{
         new Thread(this).start();
     }
 
-    public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        setSize();
-        animateMaze(graphics);
-    }
-
     /* Sets the size of the width and height needed for drawing before animating/generating the maze */
     public void setSize() {
         int border = 10;
-        if (getWidth() != MazeGenerator.width || getHeight() != MazeGenerator.height) {
-            MazeGenerator.width = getWidth();
-            MazeGenerator.height = getHeight();
+        if (getWidth() != MazeGenerator.mazeWidth || getHeight() != MazeGenerator.mazeHeight) {
+            MazeGenerator.mazeWidth = getWidth();
+            MazeGenerator.mazeHeight = getHeight();
 
-            int width = (MazeGenerator.width - 2 * border) / MazeGenerator.columns;
-            int height = (MazeGenerator.height - 2 * border) / MazeGenerator.rows;
+            int width = (MazeGenerator.mazeWidth - 2 * border) / MazeGenerator.columns;
+            int height = (MazeGenerator.mazeHeight - 2 * border) / MazeGenerator.rows;
 
-            leftWall = (MazeGenerator.width - width * MazeGenerator.columns) / 2;
-            topWall = (MazeGenerator.height - height * MazeGenerator.rows) / 2;
+            leftWall = (MazeGenerator.mazeWidth - width * MazeGenerator.columns) / 2;
+            topWall = (MazeGenerator.mazeHeight - height * MazeGenerator.rows) / 2;
 
-            totalWidth = width * MazeGenerator.columns;
-            totalHeight = height * MazeGenerator.rows;
+            panelWidth = width * MazeGenerator.columns;
+            panelHeight = height * MazeGenerator.rows;
         }
     }
 
     public void animateMaze(Graphics graphics) {
         if (MazeGenerator.mazeExists) {
-            int width = totalWidth / MazeGenerator.columns;
-            int height = totalHeight / MazeGenerator.rows;
+            int width = panelWidth / MazeGenerator.columns;
+            int height = panelHeight / MazeGenerator.rows;
 
             for (int j = 0; j < MazeGenerator.columns; j++){
                 for (int i = 0; i < MazeGenerator.rows; i++) {
@@ -63,7 +57,6 @@ public class MazeAnimator extends JPanel implements Runnable{
                         else {
                             graphics.setColor(Color.WHITE);
                         }
-
                     }
                     graphics.fillRect( (j * width) + leftWall, (i * height) +
                             topWall, width, height);
@@ -92,6 +85,13 @@ public class MazeAnimator extends JPanel implements Runnable{
             MazeGenerator.mazeExists = false;
             repaint();
         }
+    }
+
+    /* https://www.oracle.com/technetwork/java/painting-140037.html */
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        setSize();
+        animateMaze(graphics);
     }
 
     public static void main(String[] args) {
