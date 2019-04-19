@@ -52,9 +52,12 @@ public class MazeGenerator {
             for (int j = 1; j < columns - 1; j += 2) {
 
                 emptyCellCount++;
-
-                /* For clarity, each room is represented by a different negative number */
-                maze[i][j] = -emptyCellCount;
+                /* Checks the wall to the right of the room */
+                if (j < columns - 2) {
+                    rowPositions[wallCount] = i;
+                    columnPositions[wallCount] = j + 1;
+                    wallCount++;
+                }
 
                 /* Checks the wall beneath the room */
                 if (i < rows - 2) {
@@ -63,12 +66,8 @@ public class MazeGenerator {
                     wallCount++;
                 }
 
-                /* Checks the wall to the right of the room */
-                if (j < columns - 2) {
-                    rowPositions[wallCount] = i;
-                    columnPositions[wallCount] = j + 1;
-                    wallCount++;
-                }
+                /* For clarity, each room is represented by a different negative number */
+                maze[i][j] = -emptyCellCount;
             }
         }
 
@@ -78,7 +77,7 @@ public class MazeGenerator {
          * Tearing down a wall joins two cells into one cell.
          * If the cells on both sides of the wall have the same code, it will form a loop, so it is left alone. */
         int randomInt;
-        for (int i= wallCount-1; i>0; i--) {
+        for (int i = wallCount-1; i > 0; i--) {
             randomInt = (int)(Math.random() * i);
 
             /* Separates the cells horizontally if row is odd */
@@ -112,12 +111,8 @@ public class MazeGenerator {
 
         /* Replace the negative values set in each room with the emptyCode */
         for (int i = 1; i< rows - 1; i++)
-            for (int j=1; j< columns - 1; j++)
+            for (int j = 1; j< columns - 1; j++)
                 if (maze[i][j] < 0)
                     maze[i][j] = emptyCode;
     }
-
-
-
-
 }

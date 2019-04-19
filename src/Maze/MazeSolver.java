@@ -1,6 +1,9 @@
 package Maze;
 
-public class MazeSolver {
+import javax.swing.*;
+
+
+public class MazeSolver extends JPanel{
 
     /* Boolean function to return if the maze is solved or not. It is considered to be solved if the path of the maze
      * reaches the bottom right cell of the grid.  */

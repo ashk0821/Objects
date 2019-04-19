@@ -4,21 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MazeAnimator extends JPanel implements Runnable{
-    MazeSolver solver = new MazeSolver();
-    private Color[] colorList;
     private int totalWidth, totalHeight, leftWall, topWall;
+    MazeSolver solver = new MazeSolver();
 
     public MazeAnimator() {
         /* https://docs.oracle.com/javase/7/docs/api/javax/swing/JPanel.html */
-        colorList = new Color[] {Color.BLACK, Color.BLACK, Color.BLUE, Color.WHITE, Color.WHITE};
-
-        setBackground(colorList[MazeGenerator.backgroundCode]);
+        setBackground(Color.white);
 
         setPreferredSize(new Dimension(MazeGenerator.cellSize * MazeGenerator.columns,
                 MazeGenerator.cellSize * MazeGenerator.rows));
 
         /* https://www.geeksforgeeks.org/java-lang-thread-class-java/ */
         new Thread(this).start();
+    }
+
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        setSize();
+        animateMaze(graphics);
     }
 
     /* Sets the size of the width and height needed for drawing before animating/generating the maze */
@@ -39,12 +42,6 @@ public class MazeAnimator extends JPanel implements Runnable{
         }
     }
 
-    public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        setSize();
-        animateMaze(graphics);
-    }
-
     public void animateMaze(Graphics graphics) {
         if (MazeGenerator.mazeExists) {
             int width = totalWidth / MazeGenerator.columns;
@@ -53,10 +50,20 @@ public class MazeAnimator extends JPanel implements Runnable{
             for (int j = 0; j < MazeGenerator.columns; j++){
                 for (int i = 0; i < MazeGenerator.rows; i++) {
                     if (MazeGenerator.maze[i][j] < 0) {
-                        graphics.setColor(colorList[MazeGenerator.emptyCode]);
+                        graphics.setColor(Color.WHITE);
                     }
                     else {
-                        graphics.setColor(colorList[MazeGenerator.maze[i][j]]);
+                        if ((MazeGenerator.maze[i][j] == MazeGenerator.backgroundCode) ||
+                                (MazeGenerator.maze[i][j] == MazeGenerator.wallCode)) {
+                            graphics.setColor(Color.BLACK);
+                        }
+                        else if (MazeGenerator.maze[i][j] == MazeGenerator.pathCode){
+                            graphics.setColor(Color.magenta);
+                        }
+                        else {
+                            graphics.setColor(Color.WHITE);
+                        }
+
                     }
                     graphics.fillRect( (j * width) + leftWall, (i * height) +
                             topWall, width, height);
