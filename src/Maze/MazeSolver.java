@@ -1,35 +1,47 @@
 package Maze;
 
-import java.awt.*;
-import javax.swing.*;
+public class MazeSolver {
 
-public class MazeSolver extends JPanel{
-    boolean solveMaze(int row, int col) {
-        // Try to solve the maze by continuing current path from position
-        // (row,col).  Return true if a solution is found.  The maze is
-        // considered to be solved if the path reaches the lower right cell.
-        if (MazeGenerator.maze[row][col] == MazeGenerator.emptyCode) {
-            MazeGenerator.maze[row][col] = MazeGenerator.pathCode;      // add this cell to the path
-            repaint();
-            if (row == MazeGenerator.rows-2 && col == MazeGenerator.columns-2)
-                return true;  // path has reached goal
-            try { Thread.sleep(MazeGenerator.speedSleep); }
-            catch (InterruptedException e) { }
-            if ( solveMaze(row-1,col)  ||     // try to solve maze by extending path
-                    solveMaze(row,col-1)  ||     //    in each possible direction
-                    solveMaze(row+1,col)  ||
-                    solveMaze(row,col+1) )
+    /* Boolean function to return if the maze is solved or not. It is considered to be solved if the path of the maze
+     * reaches the bottom right cell of the grid.  */
+    public boolean solveMaze(int row, int column) {
+        int sleepTime = 20;
+        if (MazeGenerator.maze[row][column] == MazeGenerator.emptyCode) {
+
+            /* Adds the cell to the path */
+            MazeGenerator.maze[row][column] = MazeGenerator.pathCode;
+
+            /* The path has reached it's goal */
+            if (row == MazeGenerator.rows - 2 && column == MazeGenerator.columns - 2) {
                 return true;
-            // maze can't be solved from this cell, so backtrack out of the cell
-            MazeGenerator.maze[row][col] = MazeGenerator.visitedCode;   // mark cell as having been visited
-            repaint();
+            }
+
+            try {
+                Thread.sleep(sleepTime);
+            }
+            catch (InterruptedException e) { }
+
+            /* If the maze has not been solved, it tries to solve the maze by extending its path */
+            if (solveMaze(row - 1,column)  || solveMaze(row,column-1)  || solveMaze(row+1,column)  ||
+                    solveMaze(row,column+1) ){
+                return true;
+            }
+
+            /* The maze could not have been solved this way so now it backtracks itself out of the cell and goes back
+             * to the known path */
+
+            /* Marks the cell as a visited cell */
+            MazeGenerator.maze[row][column] = MazeGenerator.visitedCode;   // mark cell as having been visited
+
+            /* https://www.geeksforgeeks.org/synchronized-in-java/ */
+            /* https://stackoverflow.com/questions/13264726/java-syntax-synchronized-this */
             synchronized(this) {
-                try { wait(MazeGenerator.speedSleep); }
+                try {
+                    wait(sleepTime);
+                }
                 catch (InterruptedException e) { }
             }
         }
         return false;
     }
-
-
 }
