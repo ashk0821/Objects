@@ -72,7 +72,6 @@ public class MazeAnimator extends JPanel implements Runnable{
         while (true) {
             MazeGenerator.generateMaze();
             solver.solveMaze(1,1);
-
             synchronized(this) {
                 try {
                     wait(sleepTime);
@@ -81,7 +80,6 @@ public class MazeAnimator extends JPanel implements Runnable{
 
                 }
             }
-
             MazeGenerator.mazeExists = false;
             repaint();
         }
