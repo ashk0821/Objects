@@ -140,14 +140,6 @@ public class SchoolRunner {
         cData.setGrade(alan, 1000);
         ap.setGrade(alan, 890);
         advanced.setGrade(alan, 860);
-
-        System.out.println(alan.getGPA());
-
-        if ((int) alan.getGPA() == 916)
-            System.out.println("Passed 14");
-        else
-            System.out.println("Failed 14");
-
         ansh.addCourse(cData);
         ansh.addCourse(ap);
         ansh.addCourse(advanced);
@@ -159,14 +151,20 @@ public class SchoolRunner {
         chris.addCourse(ap);
         ap.setGrade(chris, 780);
 
+        System.out.println(ap.topStudent());
+
+        System.out.println(alan.getGPA());
+
         if (ap.numberEnrolled() == 3)
+            System.out.println("Passed 14");
+        else
+            System.out.println("Failed 14");
+
+        System.out.println(ap.topStudent());
+
+        if ((int) alan.getGPA() == 916)
             System.out.println("Passed 15");
         else
             System.out.println("Failed 15");
-
-
-
-
-        // getGPA(), compareTo(), gradeValue(), kidWithClassRank(), topStudent(), setGrade()
     }
 }

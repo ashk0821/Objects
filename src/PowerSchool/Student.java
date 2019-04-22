@@ -45,7 +45,6 @@ public class Student implements Comparable<Student>{
     }
 
     public int compareTo(Student someOtherKid){
-        // don't know what comapreTo value needs to be returned, have to check
         if(getGPA() < someOtherKid.getGPA()){
             return -1;
         }
@@ -60,7 +59,7 @@ public class Student implements Comparable<Student>{
      * Returns false if: course would brings classes to more than
      * 10, or student is already enrolled. */
     public boolean addCourse(Course someCourse) {
-        for (int i=0; i<Academy.schoolCourses.length; i++) {
+        for (int i = 0; i < Academy.schoolCourses.length; i++) {
             if (Academy.schoolCourses[i] == null)
                 return false;
 
@@ -79,17 +78,11 @@ public class Student implements Comparable<Student>{
                 return false;
 
             if (schedule[i] == null) {
-                schedule[i] = new Course(someCourse.teacher, someCourse.courseTitle, someCourse.honors);
-
-                for (int j = 0; j < someCourse.enrolledStudents.length; j++) {
-                    if (someCourse.enrolledStudents[j] == null) {
-                        someCourse.enrolledStudents[j] = new Student(name, gradYear, Academy);
-                        return true;
-                    }
-                }
+                schedule[i] = someCourse;
+                break;
             }
         }
-        return false;
+        return true;
     }
 
     /* Removes course and returns true if successful.

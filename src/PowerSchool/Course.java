@@ -38,10 +38,10 @@ public class Course {
     }
 
     public int numberEnrolled(){
-        return enrolledStudents.length;
+        return enrolledStudents().length;
     }
 
-    /*public Student[] enrolledStudents(){
+    public Student[] enrolledStudents(){
         int length = 0;
 
         for (int i=0; i<enrolledStudents.length; i++) {
@@ -56,13 +56,13 @@ public class Course {
         }
 
         return ret;
-    }*/
+    }
 
     public Student topStudent(){
         int highestGradeIndex = 0;
         for(int i = 1; i < grades.length; i++){
             if (grades[i] == null)
-                return null;
+                break;
 
             if(grades[i].gradeValue() > grades[highestGradeIndex].gradeValue()){
                 highestGradeIndex = i;
@@ -70,6 +70,7 @@ public class Course {
         }
 
         return enrolledStudents[highestGradeIndex];
+
     }
 
     public void setGrade(Student someStudent, int grade){
@@ -83,7 +84,17 @@ public class Course {
     public boolean enroll(Student someStudent, boolean audited) {
         if (enrolledStudents[enrolledStudents.length-1] != null)
             return false;
-        return someStudent.addCourse(new Course(teacher, courseTitle, honors));
+
+        if (someStudent.addCourse(this)) {
+            for (int i = 0; i < enrolledStudents.length; i++) {
+                if (enrolledStudents[i] == null) {
+                    enrolledStudents[i] = someStudent;
+                    grades[i] = new Grade(honors, audited, 1000, this);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void unenroll (Student someStudent) {
