@@ -1,5 +1,7 @@
 package PowerSchool;
 
+import java.util.Arrays;
+
 public class Student implements Comparable<Student>{
     String name;
     int gradYear;
@@ -25,18 +27,23 @@ public class Student implements Comparable<Student>{
         return Academy;
     }
 
-    public int getGPA(){
-        int GPA = 0;
-        int numberOfCourses = 0;
-
-        for (int i = 0; i < schedule.length; i++){
-            if (schedule[i] == null) {
-                numberOfCourses = i;
-                break;
+    public double getGPA(){
+        double GPA = 0;
+        double numberOfCourses = 0;
+        int i = 0;
+        Course z = schedule[i];
+        System.out.println(Arrays.toString(z.enrolledStudents));
+        while(schedule[i] != null) {
+            for (int x =0; i < schedule[i].grades.length; i++ ){
+                System.out.print(x+" ");
+                if (schedule[i].enrolledStudents[x].equals(this)){
+                    if(schedule[i].grades[x].audited == false){
+                        GPA += schedule[i].gradeOf(this).gradeValue();
+                    }
+                }
             }
-            if (schedule[i].gradeOf(this).gradeValue() > -1)
-                GPA += schedule[i].gradeOf(this).gradeValue();
-
+            numberOfCourses++;
+            i++;
         }
 
         if (numberOfCourses == 0)
@@ -45,49 +52,25 @@ public class Student implements Comparable<Student>{
     }
 
     public int compareTo(Student someOtherKid){
-        // don't know what comapreTo value needs to be returned, have to check
-        if(getGPA() < someOtherKid.getGPA()){
-            return -1;
-        }
-        else if(getGPA() > someOtherKid.getGPA()){
-            return 1;
-        }
-
-        return 0;
+        return (int)(this.getGPA()- someOtherKid.getGPA());
     }
 
     /* Adds course and returns true if successful.
      * Returns false if: course would brings classes to more than
      * 10, or student is already enrolled. */
     public boolean addCourse(Course someCourse) {
-        for (int i=0; i<Academy.schoolCourses.length; i++) {
-            if (Academy.schoolCourses[i] == null)
-                return false;
-
-            if (Academy.schoolCourses[i].teacher.equals(someCourse.teacher) && Academy.getCourses()[i].courseTitle.equals(someCourse.courseTitle))
-                break;
-        }
-
-        if (someCourse.enrolledStudents[someCourse.enrolledStudents.length - 1] != null)
-            return false;
-
         if (schedule[schedule.length - 1] != null)
             return false;
 
         for (int i = 0; i < schedule.length; i++) {
-            if (schedule[i] == someCourse)
+            if (schedule[i] == null) {
+                schedule[i] = someCourse;
+                return true;
+            }
+            if (schedule[i].equals(someCourse))
                 return false;
 
-            if (schedule[i] == null) {
-                schedule[i] = new Course(someCourse.teacher, someCourse.courseTitle, someCourse.honors);
 
-                for (int j = 0; j < someCourse.enrolledStudents.length; j++) {
-                    if (someCourse.enrolledStudents[j] == null) {
-                        someCourse.enrolledStudents[j] = new Student(name, gradYear, Academy);
-                        return true;
-                    }
-                }
-            }
         }
         return false;
     }
@@ -96,16 +79,16 @@ public class Student implements Comparable<Student>{
      * Returns false if: course was not on student’s schedule.
      */
     public boolean dropCourse(Course someCourse) {
-        Student student = new Student(name, gradYear, Academy);
-
         for (int i=0; i<schedule.length; i++) {
             if (schedule[i] == null)
                 return false;
-            if (schedule[i].teacher.equals(someCourse.teacher) && schedule[i].courseTitle.equals(someCourse.courseTitle))
+            if (schedule[i].courseTitle.equals(someCourse.courseTitle))
+                for(int x = i; x< schedule.length-1;x++){
+                    schedule[x] = schedule[x+1];
+                }
                 break;
         }
 
-        someCourse.unenroll(student);
         return true;
     }
 }

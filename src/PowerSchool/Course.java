@@ -3,7 +3,6 @@ package PowerSchool;
 import java.util.Arrays;
 
 public class Course {
-
     String courseTitle;
     String teacher;
     Student[] enrolledStudents;
@@ -41,11 +40,11 @@ public class Course {
         return enrolledStudents.length;
     }
 
-    /*public Student[] enrolledStudents(){
+    public Student[] enrolledStudents(){
         int length = 0;
 
         for (int i=0; i<enrolledStudents.length; i++) {
-            if (enrolledStudents[i] != null)
+            while (enrolledStudents[i] != null)
                 length++;
         }
 
@@ -56,13 +55,13 @@ public class Course {
         }
 
         return ret;
-    }*/
+    }
 
     public Student topStudent(){
         int highestGradeIndex = 0;
         for(int i = 1; i < grades.length; i++){
             if (grades[i] == null)
-                return null;
+                break;
 
             if(grades[i].gradeValue() > grades[highestGradeIndex].gradeValue()){
                 highestGradeIndex = i;
@@ -81,9 +80,23 @@ public class Course {
     }
 
     public boolean enroll(Student someStudent, boolean audited) {
-        if (enrolledStudents[enrolledStudents.length-1] != null)
+        if (enrolledStudents[enrolledStudents.length - 1] != null)
             return false;
-        return someStudent.addCourse(new Course(teacher, courseTitle, honors));
+
+        boolean temp = someStudent.addCourse(this);
+
+
+
+        if (temp){
+            for (int i =0; i < enrolledStudents.length; i++){
+                if (enrolledStudents[i] ==null){
+                    enrolledStudents[i] = someStudent;
+                    grades[i] = new Grade(honors, audited, 0, this);
+                    break;
+                }
+            }
+        }
+        return temp;
     }
 
     public void unenroll (Student someStudent) {
@@ -92,8 +105,12 @@ public class Course {
                 break;
             if (enrolledStudents[i].equals(someStudent)) {
                 enrolledStudents[i] = null;
+                grades[i] = null;
                 Arrays.sort(enrolledStudents);
+                Arrays.sort(grades);
             }
         }
+        someStudent.dropCourse(this);
+
     }
 }

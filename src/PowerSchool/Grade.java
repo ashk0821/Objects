@@ -24,13 +24,17 @@ public class Grade {
     }
 
     public int gradeValue(){
-        if (audited())
-            grade = -1;
+        //if (audited())
+          //  grade = -1;
 
         if(honors())
             grade += grade * 0.05;
 
         return grade;
+    }
+
+    public void setAudited(boolean audited) {
+        this.audited = audited;
     }
 
     public boolean honors(){

@@ -41,6 +41,7 @@ public class School {
        for (int i=0; i<schoolCourses.length; i++) {
            if (schoolCourses[i] != null)
                length++;
+
        }
 
         Course[] ret = new Course[length];
@@ -62,6 +63,7 @@ public class School {
             if (i + 1 == rank) {
                 return enrolledStudents[i];
             }
+
         }
         return null;
     }
@@ -136,11 +138,18 @@ public class School {
      * Student would have more than 10 Courses.
      */
     public boolean enroll(Student kid, Course someCourse, boolean audited) {
-        for (int i=0; i<getCourses().length; i++) {
-            if (getCourses()[i].equals(someCourse))
-                break;
+//      for (int i=0; i<schoolCourses.length; i++) {
+//            if (schoolCourses[i]!= null && schoolCourses[i].teacher.equals((someCourse.teacher)))
+        for (int i = 0; i < schoolCourses.length; i++) {
+            try {
+                if (schoolCourses[i].courseTitle.equals(someCourse.courseTitle))
+                    return (someCourse.enroll(kid, audited));
+            }catch (Exception e){
+                return false;}
         }
-        return (someCourse.enroll(kid, audited));
+    return false;
+
+
     }
 
     /* Unenrolls Student in Course and returns true if successful.
@@ -150,10 +159,9 @@ public class School {
         for (int i = 0; i < schoolCourses.length; i++) {
             if (schoolCourses[i] == null)
                 return false;
-            if (schoolCourses[i].courseTitle.equals(someCourse.courseTitle) && schoolCourses[i].teacher.equals(someCourse.teacher))
-                break;
+            if (schoolCourses[i].equals(someCourse))
+                return kid.dropCourse(someCourse);
         }
-
-        return kid.dropCourse(someCourse);
+        return false;
     }
 }
