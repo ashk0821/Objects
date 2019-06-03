@@ -33,7 +33,7 @@ public class MazeSolver {
              * to the known path */
 
             /* Marks the cell as a visited cell */
-            MazeGenerator.maze[row][column] = MazeGenerator.visitedCode;   // mark cell as having been visited
+            MazeGenerator.maze[row][column] = MazeGenerator.visitedCode;
 
             /* https://www.geeksforgeeks.org/synchronized-in-java/ */
             /* https://stackoverflow.com/questions/13264726/java-syntax-synchronized-this */

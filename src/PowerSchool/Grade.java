@@ -11,14 +11,30 @@ public class Grade {
         this.audited = audited;
         this.course = course;
 
-        this.grade = Math.max(Math.min(grade, 1000), 0);
+        if(this.grade > 1000){
+            this.grade = 1000;
+        }
+        else if(this.grade < 0){
+            this.grade = 0;
+        }
+        else
+            this.grade = grade;
 
-        if(honors())
-            this.grade = (int) (this.grade * 1.05);
+
     }
 
     public int gradeValue(){
+        //if (audited())
+          //  grade = -1;
+
+        if(honors())
+            grade += grade * 0.05;
+
         return grade;
+    }
+
+    public void setAudited(boolean audited) {
+        this.audited = audited;
     }
 
     public boolean honors(){

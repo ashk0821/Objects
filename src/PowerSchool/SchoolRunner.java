@@ -50,7 +50,7 @@ public class SchoolRunner {
         else
             System.out.println("Failed 3");
 
-        Course intro = new Course ("Mr. Respass", "Intro to Comp Sci", false);
+        Course intro = new Course("Mr. Respass", "Intro to Comp Sci", false);
         Course scratch = new Course ("Mr. Billy", "Intro to Scratch", false);
         Course cData = new Course ("Mr. Wang", "C and Data Structures", true);
         Course ap = new Course ("Mr. Isecke", "AP Comp Sci", true);
@@ -82,9 +82,9 @@ public class SchoolRunner {
         else
             System.out.println("Failed 5a");
 
-        intro.enroll(amani, false);
-        intro.enroll(aashir, false);
-        intro.enroll(chris, false);
+        comp_sci.enroll(amani, intro, false);
+        comp_sci.enroll(aashir, intro, false);
+        comp_sci.enroll(chris, intro, false);
 
         if (comp_sci.enroll(alan, scratch, false))
             System.out.println("Failed 6");
@@ -133,13 +133,29 @@ public class SchoolRunner {
         else
             System.out.println("Failed 13");
 
-        alan.addCourse(cData);
+        /*alan.addCourse(cData);
         alan.addCourse(ap);
         alan.addCourse(advanced);
-
         cData.setGrade(alan, 1000);
         ap.setGrade(alan, 890);
         advanced.setGrade(alan, 860);
+        */
+
+        comp_sci.enroll(alan, cData, false);
+        comp_sci.enroll(alan, ap, false);
+        comp_sci.enroll(alan, advanced, false);
+
+        intro.setGrade(alan, 1000);
+        cData.setGrade(alan, 1000);
+        ap.setGrade(alan, 890);
+        advanced.setGrade(alan, 860);
+
+        System.out.println(alan.getGPA());
+        if (alan.getGPA() == 937.5)
+            System.out.println("Passed 14");
+        else
+            System.out.println("Failed 14");
+
         ansh.addCourse(cData);
         ansh.addCourse(ap);
         ansh.addCourse(advanced);
@@ -151,20 +167,14 @@ public class SchoolRunner {
         chris.addCourse(ap);
         ap.setGrade(chris, 780);
 
-        System.out.println(ap.topStudent());
-
-        System.out.println(alan.getGPA());
-
         if (ap.numberEnrolled() == 3)
-            System.out.println("Passed 14");
-        else
-            System.out.println("Failed 14");
-
-        System.out.println(ap.topStudent());
-
-        if ((int) alan.getGPA() == 916)
             System.out.println("Passed 15");
         else
             System.out.println("Failed 15");
+
+
+
+
+        // getGPA(), compareTo(), gradeValue(), kidWithClassRank(), topStudent(), setGrade()
     }
 }

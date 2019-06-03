@@ -22,6 +22,7 @@ public class Team implements SportsProfessional{
     }
 
     public int getRating() {
+
         teamFinalRating = teamRating / number_of_players;
         return teamFinalRating;
     }
