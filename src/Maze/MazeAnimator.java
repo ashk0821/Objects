@@ -58,9 +58,7 @@ public class MazeAnimator extends JPanel implements Runnable{
                             graphics.setColor(Color.WHITE);
                         }
                     }
-                    graphics.fillRect( (j * width) + leftWall, (i * height) +
-                            topWall, width, height);
-
+                    graphics.fillRect( (j * width) + leftWall, (i * height) + topWall, width, height);
                 }
                 repaint();
             }
@@ -70,7 +68,6 @@ public class MazeAnimator extends JPanel implements Runnable{
     /* While-loop to repeatedly generate, solve, and animate a new maze until the user makes it force-quit */
     public void run() {
         int sleepTime = 2000;
-        repaint();
         while (true) {
             MazeGenerator.generateMaze();
             solver.solveMaze(1,1);
@@ -84,7 +81,6 @@ public class MazeAnimator extends JPanel implements Runnable{
             MazeGenerator.mazeExists = false;
             repaint();
         }
-
     }
 
     /* https://www.oracle.com/technetwork/java/painting-140037.html */
@@ -100,6 +96,5 @@ public class MazeAnimator extends JPanel implements Runnable{
         window.setContentPane(new MazeAnimator());
         window.pack();
         window.setVisible(true);
-
     }
 }
