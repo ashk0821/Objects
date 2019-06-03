@@ -72,10 +72,10 @@ public class SchoolRunner {
         else
             System.out.println("Passed 4b");
 
-        //if (comp_sci.enroll(alan, intro, true))
-          //  System.out.println("Passed 5");
-        //else
-          //  System.out.println("Failed 5");
+        if (comp_sci.enroll(alan, intro, true))
+            System.out.println("Passed 5");
+        else
+            System.out.println("Failed 5");
 
         if (comp_sci.enroll(aashir, intro, true))
             System.out.println("Passed 5a");
@@ -140,7 +140,7 @@ public class SchoolRunner {
         ap.setGrade(alan, 890);
         advanced.setGrade(alan, 860);
         */
-        comp_sci.enroll(alan,intro, false);
+
         comp_sci.enroll(alan, cData, false);
         comp_sci.enroll(alan, ap, false);
         comp_sci.enroll(alan, advanced, false);
@@ -150,7 +150,8 @@ public class SchoolRunner {
         ap.setGrade(alan, 890);
         advanced.setGrade(alan, 860);
 
-        if (alan.getGPA() == 916)
+        System.out.println(alan.getGPA());
+        if (alan.getGPA() == 937.5)
             System.out.println("Passed 14");
         else
             System.out.println("Failed 14");

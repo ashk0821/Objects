@@ -34,9 +34,8 @@ public class Student implements Comparable<Student>{
         Course z = schedule[i];
         System.out.println(Arrays.toString(z.enrolledStudents));
         while(schedule[i] != null) {
-            for (int x =0; i < schedule[i].grades.length; i++ ){
-                System.out.print(x+" ");
-                if (schedule[i].enrolledStudents[x].equals(this)){
+            for (int x =0; x < schedule[i].grades.length; x++ ){
+                if (schedule[i].enrolledStudents[x] != null && schedule[i].enrolledStudents[x].equals(this)){
                     if(schedule[i].grades[x].audited == false){
                         GPA += schedule[i].gradeOf(this).gradeValue();
                     }

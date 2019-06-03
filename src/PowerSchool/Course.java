@@ -86,8 +86,6 @@ public class Course {
 
         boolean temp = someStudent.addCourse(this);
 
-
-
         if (temp){
             for (int i =0; i < enrolledStudents.length; i++){
                 if (enrolledStudents[i] ==null){
