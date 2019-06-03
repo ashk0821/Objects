@@ -43,6 +43,7 @@ public class Course {
     public Student[] enrolledStudents(){
         int length = 0;
 
+
         for (int i=0; i<enrolledStudents.length; i++) {
             while (enrolledStudents[i] != null)
                 length++;
