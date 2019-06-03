@@ -29,7 +29,7 @@ public class DumbGambler implements Gambler {
     }
 
     public Team winnerWas (Team a, Team b) {
-        return this.a.winnerWas(this.b);
+        return a.winnerWas(b);
     }
 
     public double finalBalance() {

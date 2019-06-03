@@ -21,19 +21,19 @@ public class SmartGambler implements Gambler {
         this.b = b;
 
         if (a.getRating() >= b.getRating()) {
-            other = this.b;
-            betOn = this.a;
-            return this.a;
+            other = b;
+            betOn = a;
+            return a;
         }
         else {
-            other = this.a;
-            betOn = this.b;
-            return this.b;
+            other = a;
+            betOn = b;
+            return b;
         }
     }
 
     public Team winnerWas (Team a, Team b) {
-        winner = a.winnerWas(this.b);
+        winner = a.winnerWas(b);
         return winner;
     }
 
