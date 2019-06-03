@@ -45,14 +45,7 @@ public class Student implements Comparable<Student>{
     }
 
     public int compareTo(Student someOtherKid){
-        if(getGPA() < someOtherKid.getGPA()){
-            return -1;
-        }
-        else if(getGPA() > someOtherKid.getGPA()){
-            return 1;
-        }
-
-        return 0;
+        return Integer.compare(getGPA(), someOtherKid.getGPA());
     }
 
     /* Adds course and returns true if successful.

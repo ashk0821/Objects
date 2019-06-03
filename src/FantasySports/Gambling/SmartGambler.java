@@ -10,6 +10,8 @@ public class SmartGambler implements Gambler {
     public Team other;
     public double currentBalance=1000;
     boolean correct;
+    Team betOn;
+    Team winner;
     ArrayList<Double> history = new ArrayList<>();
 
     public Team bet (Team a, Team b) {
@@ -20,32 +22,35 @@ public class SmartGambler implements Gambler {
 
         if (a.getRating() >= b.getRating()) {
             other = this.b;
+            betOn = this.a;
             return this.a;
         }
         else {
             other = this.a;
+            betOn = this.b;
             return this.b;
         }
     }
 
     public Team winnerWas (Team a, Team b) {
-        return this.a.winnerWas(this.b);
+        winner = a.winnerWas(this.b);
+        return winner;
     }
 
     public double finalBalance() {
-        if (bet(a, b) == null)
+        if (betOn == null)
             return 0;
         if (currentBalance == 0)
             return 0;
 
-        if (bet(a, b).equals(winnerWas(a, b))) {
-            if (bet(a, b).getFinalRating() >= b.getFinalRating())
+        if (betOn.equals(winner)) {
+            if (betOn.getFinalRating() >= other.getFinalRating())
                 currentBalance += 100;
             else
                 currentBalance += 200;
         }
         else {
-            if (other.getFinalRating() >= bet(a, b).getFinalRating())
+            if (other.getFinalRating() >= betOn.getFinalRating())
                 currentBalance -= 100;
             else
                 currentBalance -= 200;

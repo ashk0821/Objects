@@ -11,25 +11,13 @@ public class Grade {
         this.audited = audited;
         this.course = course;
 
-        if(this.grade > 1000){
-            this.grade = 1000;
-        }
-        else if(this.grade < 0){
-            this.grade = 0;
-        }
-        else
-            this.grade = grade;
+        this.grade = Math.max(Math.min(grade, 1000), 0);
 
-
+        if(honors())
+            this.grade = (int) (this.grade * 1.05);
     }
 
     public int gradeValue(){
-        if (audited())
-            grade = -1;
-
-        if(honors())
-            grade += grade * 0.05;
-
         return grade;
     }
 
