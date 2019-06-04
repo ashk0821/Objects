@@ -64,7 +64,7 @@ public class MazeAnimator extends JPanel implements Runnable{
 
     /* While-loop to repeatedly generate, solve, and animate a new maze until the user makes it force-quit */
     public void run() {
-        int sleepTime = 2000;
+        int sleepTime = 1000;
         while (true) {
             MazeGenerator.generateMaze();
             solver.solveMaze(1,1);
