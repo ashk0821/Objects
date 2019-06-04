@@ -31,8 +31,6 @@ public class Student implements Comparable<Student>{
         double GPA = 0;
         double numberOfCourses = 0;
         int i = 0;
-        //Course z = schedule[i];
-        //System.out.println(Arrays.toString(z.enrolledStudents));
         while(schedule[i] != null) {
             for (int x =0; x < schedule[i].grades.length; x++ ){
                 if (schedule[i].enrolledStudents[x] != null && schedule[i].enrolledStudents[x].equals(this)){
@@ -51,7 +49,8 @@ public class Student implements Comparable<Student>{
     }
 
     public int compareTo(Student someOtherKid){
-        return (int)(this.getGPA()- someOtherKid.getGPA());
+        return (int)(this.getGPA() - someOtherKid.getGPA());
+
     }
 
     /* Adds course and returns true if successful.
@@ -81,7 +80,7 @@ public class Student implements Comparable<Student>{
         for (int i=0; i<schedule.length; i++) {
             if (schedule[i] == null)
                 return false;
-            if (schedule[i].courseTitle.equals(someCourse.courseTitle))
+            if (schedule[i].equals(someCourse))
                 for(int x = i; x< schedule.length-1;x++){
                     schedule[x] = schedule[x+1];
                 }

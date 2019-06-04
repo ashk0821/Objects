@@ -37,7 +37,14 @@ public class Course {
     }
 
     public int numberEnrolled(){
-        return enrolledStudents.length;
+        int length = 0;
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            if (enrolledStudents[i] == null)
+                break;
+            length++;
+        }
+
+        return length;
     }
 
     public Student[] enrolledStudents(){
@@ -107,9 +114,10 @@ public class Course {
                 grades[i] = null;
                 Arrays.sort(enrolledStudents);
                 Arrays.sort(grades);
+                someStudent.dropCourse(this);
+                break;
             }
         }
-        someStudent.dropCourse(this);
 
     }
 }

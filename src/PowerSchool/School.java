@@ -54,7 +54,7 @@ public class School {
     }
 
     /* returns Student with specified class rank. Since you have implemented compareTo,
-     * you can use Arrays.sort to sort enrolledStudets.
+     * you can use Arrays.sort to sort enrolledStudents.
      */
     public Student kidWithClassRank(int rank) {
         Arrays.sort(enrolledStudents);
@@ -158,9 +158,10 @@ public class School {
     public boolean unenroll(Student kid, Course someCourse) {
         for (int i = 0; i < schoolCourses.length; i++) {
             if (schoolCourses[i] == null)
-                return false;
+                break;
             if (schoolCourses[i].equals(someCourse))
-                return kid.dropCourse(someCourse);
+                someCourse.unenroll(kid);
+                return true;
         }
         return false;
     }

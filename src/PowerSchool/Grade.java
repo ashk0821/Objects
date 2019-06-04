@@ -11,7 +11,10 @@ public class Grade {
         this.audited = audited;
         this.course = course;
 
-        if(this.grade > 1000){
+        if(honors())
+            this.grade =(int) 1.05 * grade;
+
+        else if(this.grade > 1000){
             this.grade = 1000;
         }
         else if(this.grade < 0){
@@ -25,10 +28,7 @@ public class Grade {
 
     public int gradeValue(){
         //if (audited())
-          //  grade = -1;
-
-        if(honors())
-            grade += grade * 0.05;
+        //  grade = -1;
 
         return grade;
     }
