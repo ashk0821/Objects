@@ -31,17 +31,17 @@ public class Student implements Comparable<Student>{
         double GPA = 0;
         double numberOfCourses = 0;
         int i = 0;
-        Course z = schedule[i];
-        System.out.println(Arrays.toString(z.enrolledStudents));
+        //Course z = schedule[i];
+        //System.out.println(Arrays.toString(z.enrolledStudents));
         while(schedule[i] != null) {
             for (int x =0; x < schedule[i].grades.length; x++ ){
                 if (schedule[i].enrolledStudents[x] != null && schedule[i].enrolledStudents[x].equals(this)){
                     if(schedule[i].grades[x].audited == false){
                         GPA += schedule[i].gradeOf(this).gradeValue();
+                        numberOfCourses++;
                     }
                 }
             }
-            numberOfCourses++;
             i++;
         }
 
