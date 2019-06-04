@@ -50,7 +50,6 @@ public class Student implements Comparable<Student>{
 
     public int compareTo(Student someOtherKid){
         return (int)(this.getGPA() - someOtherKid.getGPA());
-
     }
 
     /* Adds course and returns true if successful.

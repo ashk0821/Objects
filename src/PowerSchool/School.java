@@ -36,13 +36,13 @@ public class School {
     /* Returns the array of courses. (Deep copy)
      */
     public Course[] getCourses() {
-       int length = 0;
+        int length = 0;
 
-       for (int i=0; i<schoolCourses.length; i++) {
-           if (schoolCourses[i] != null)
-               length++;
+        for (int i=0; i<schoolCourses.length; i++) {
+            if (schoolCourses[i] != null)
+                length++;
 
-       }
+        }
 
         Course[] ret = new Course[length];
 
@@ -147,7 +147,7 @@ public class School {
             }catch (Exception e){
                 return false;}
         }
-    return false;
+        return false;
 
 
     }
@@ -161,7 +161,7 @@ public class School {
                 break;
             if (schoolCourses[i].equals(someCourse))
                 someCourse.unenroll(kid);
-                return true;
+            return true;
         }
         return false;
     }

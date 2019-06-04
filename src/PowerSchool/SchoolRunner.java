@@ -179,36 +179,29 @@ public class SchoolRunner {
         else
             System.out.println("Failed 24");
 
-
-        /*if(comp_sci.kidWithClassRank(1).equals(ansh))
+        if (ap.topStudent().equals(alan))
             System.out.println("Passed 25");
         else
             System.out.println("Failed 25");
-            */
 
-
-        if (ap.topStudent().equals(alan))
+        ap.setGrade(chris, 781);
+        if (ap.gradeOf(chris).gradeValue() == 781)
             System.out.println("Passed 26");
         else
             System.out.println("Failed 26");
 
-        ap.setGrade(chris, 781);
-        if (ap.gradeOf(chris).gradeValue() == 781)
+        Course[] temp_arr = comp_sci.getCourses();
+
+        if(temp_arr.length == 4)
             System.out.println("Passed 27");
         else
             System.out.println("Failed 27");
 
-        Course[] temp_arr = comp_sci.getCourses();
-
-        if(temp_arr.length == 4)
+        if (temp_arr[0].equals(comp_sci.getCourses()[0]))
             System.out.println("Passed 28");
         else
             System.out.println("Failed 28");
 
-        if (temp_arr[0].equals(comp_sci.getCourses()[0]))
-            System.out.println("Passed 28a");
-        else
-            System.out.println("Failed 28a");
 
 
     }
