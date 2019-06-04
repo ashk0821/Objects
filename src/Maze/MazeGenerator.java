@@ -112,7 +112,8 @@ public class MazeGenerator {
         /* Replace the negative values set in each room with the emptyCode */
         for (int i = 1; i< rows - 1; i++)
             for (int j = 1; j< columns - 1; j++)
-                if (maze[i][j] < 0)
+                if (maze[i][j] < 0) {
                     maze[i][j] = emptyCode;
+                }
     }
 }
