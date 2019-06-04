@@ -1,7 +1,5 @@
 package Maze;
 
-import javax.swing.*;
-
 public class MazeSolver {
 
     /* Boolean function to return if the maze is solved or not. It is considered to be solved if the path of the maze
@@ -40,6 +38,7 @@ public class MazeSolver {
             synchronized(this) {
                 try {
                     wait(sleepTime);
+
                 }
                 catch (InterruptedException e) { }
             }

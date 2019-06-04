@@ -8,9 +8,6 @@ public class MazeAnimator extends JPanel implements Runnable{
     MazeSolver solver = new MazeSolver();
 
     public MazeAnimator() {
-        /* https://docs.oracle.com/javase/7/docs/api/javax/swing/JPanel.html */
-        setBackground(Color.white);
-
         setPreferredSize(new Dimension(MazeGenerator.cellSize * MazeGenerator.columns,
                 MazeGenerator.cellSize * MazeGenerator.rows));
 
@@ -41,8 +38,8 @@ public class MazeAnimator extends JPanel implements Runnable{
             int width = panelWidth / MazeGenerator.columns;
             int height = panelHeight / MazeGenerator.rows;
 
-            for (int j = 0; j < MazeGenerator.columns; j++){
-                for (int i = 0; i < MazeGenerator.rows; i++) {
+            for (int i = 0; i < MazeGenerator.columns; i++){
+                for (int j = 0; j < MazeGenerator.rows; j++) {
                     if (MazeGenerator.maze[i][j] < 0) {
                         graphics.setColor(Color.WHITE);
                     }
@@ -58,7 +55,7 @@ public class MazeAnimator extends JPanel implements Runnable{
                             graphics.setColor(Color.WHITE);
                         }
                     }
-                    graphics.fillRect( (j * width) + leftWall, (i * height) + topWall, width, height);
+                    graphics.fillRect( (i * width) + leftWall, (j * height) + topWall, width, height);
                 }
                 repaint();
             }
